@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLinkActive } from '@angular/router';
+import { ActivatedRoute, Router, RouterLinkActive } from '@angular/router';
 import { ItemService } from '../service/item.service';
 import { Item } from '../modelo/item.model';
 import { Category } from '../../category/model/category.model';
@@ -18,6 +18,7 @@ export class ItemFormComponent implements OnInit {
   categories: Category[] = [];
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private itemService: ItemService,
               private categoryService: CategoryService
               ){}
@@ -46,12 +47,13 @@ export class ItemFormComponent implements OnInit {
   }
 
   private initializeItem(): void{
-    this.item = new Item(undefined, "", 0, false);
+    this.item = new Item(undefined, "", 0);
   }
 
   public saveItem():void{
     if(this.mode == "NEW"){
       this.insertItem();
+
     }
 
     if(this.mode == "UPDATE"){
@@ -62,8 +64,8 @@ export class ItemFormComponent implements OnInit {
   private insertItem():void{
     this.itemService.insertItem(this.item!).subscribe({
       next: (itemInserted) => {
-        console.log("insertado correctamente");
-        console.log(itemInserted);
+        alert("insertado correctamente");
+        this.router.navigate(['/items']);
       },
       error: (err) => {this.handleError(err);}
     });
@@ -72,8 +74,8 @@ export class ItemFormComponent implements OnInit {
   private updateItem():void{
     this.itemService.updatetItem(this.item!).subscribe({
       next: (itemUpdate) => {
-      console.log("Actualizado correctamente");
-      console.log(itemUpdate);
+      alert("Actualizado correctamente");
+      this.router.navigate(['/items']);
     },
     error: (err) => {this.handleError(err);}
   });

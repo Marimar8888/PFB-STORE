@@ -1,14 +1,15 @@
 <section >
   <mat-card-content class="card-content" *ngIf="article" [routerLink]="['/ficha', article.getId()]">
 
-  <a><img class="mat-card-image" src={{article.getImage()}} [alt]="article.getTitulo()">
+  <a><img class="mat-card-image" [src]="'data:image/webp;base64,' + article.getImage()" [alt]="article.getName()">
+
     <p class="card-title">
-      {{article.getTitulo()}}
+      {{article.getName()}}
     </p>
     <div class="precio">
-      <label class="class-price" [ngClass]="{'rebajas':article.getRebaja()}"> {{article.getPrecio() | currency:'EUR':'symbol':'1.2-2':'es'}}</label >
-        <ng-template [ngIf]="article.getRebaja()">
-        <label class="rebaja">{{article.getRebaja() | currency:'EUR':'symbol':'1.2-2':'es'}}</label>
+      <label class="class-price" [ngClass]="{'rebajas':article.getReduced()}"> {{article.getPrice() | currency:'EUR':'symbol':'1.2-2':'es'}}</label >
+        <ng-template [ngIf]="article.getReduced()">
+        <label class="rebaja">{{article.getReduced() | currency:'EUR':'symbol':'1.2-2':'es'}}</label>
         </ng-template>
     </div></a>
     <div id="group">

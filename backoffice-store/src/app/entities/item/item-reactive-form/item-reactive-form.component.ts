@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '../modelo/item.model';
 import { Category } from '../../category/model/category.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ItemService } from '../service/item.service';
 import { CategoryService } from '../../category/service/category.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -24,7 +24,8 @@ export class ItemReactiveFormComponent implements OnInit {
     constructor(private route: ActivatedRoute,
                 private itemService: ItemService,
                 private categoryService: CategoryService,
-                private fb: FormBuilder
+                private fb: FormBuilder,
+                private router: Router
                 ) { }
 
     ngOnInit(): void {
@@ -102,6 +103,7 @@ export class ItemReactiveFormComponent implements OnInit {
         name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
         description: ['', [Validators.maxLength(2000)]],
         price: [ 0, [Validators.required, Validators.min(0)]],
+        reduced: [ '', [ Validators.min(0)]],
         category: [undefined, [Validators.required]]
       })
     }
@@ -123,7 +125,6 @@ export class ItemReactiveFormComponent implements OnInit {
         name: this.itemForm?.get(['name'])!.value,
         description: this.itemForm?.get(['description'])!.value,
         price: this.itemForm?.get(['price'])!.value,
-        favorite: false,
         reduced: this.itemForm?.get(['reduced'])!.value,
         image: this.item!.image,
         categoryId: this.itemForm?.get(['category'])!.value.id,
@@ -163,8 +164,8 @@ export class ItemReactiveFormComponent implements OnInit {
     private insertItem(itemToSave: Item): void {
         this.itemService.insertItem(itemToSave).subscribe({
             next: (itemInserted) => {
-              console.log("Insertado correctamente");
-              console.log(itemInserted);
+              alert("insertado correctamente");
+              this.router.navigate(['/items']);
             },
             error: (err) => {this.handleError(err);}
         })
@@ -173,8 +174,8 @@ export class ItemReactiveFormComponent implements OnInit {
     private updateItem(itemToSave: Item): void {
       this.itemService.updatetItem(itemToSave).subscribe({
         next: (itemUpdated) => {
-          console.log("Modificado correctamente");
-          console.log(itemUpdated);
+          alert("Modificado correctamente");
+          this.router.navigate(['/items']);
         },
         error: (err) => {this.handleError(err);}
     })
@@ -192,7 +193,7 @@ export class ItemReactiveFormComponent implements OnInit {
     }
 
     private initializeItem(): void {
-      this.item = new Item(undefined, "", 0, false);
+      this.item = new Item(undefined, "", 0);
     }
 
     private handleError(err: any): void {

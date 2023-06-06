@@ -1,19 +1,18 @@
 export class ItemShop  {
 
   private _id: number;
-  private _image: string;
-  private _titulo: string;
-  private _precio: number;
-  private _rebaja: number;
-  private _favorite: boolean;
+  private _name: string;
+  private _price: number;
+  private _reduced?: number;
+  private _image?: string;
+  private _favorite?: boolean
 
-
-  constructor(id: number, titulo:string, image: string, precio: number, rebaja: number, favorite: boolean) {
+  constructor(id: number, name:string, price: number, reduced?: number, image?: string, favorite?: boolean) {
       this._id = id;
       this._image = image;
-      this._titulo = titulo;
-      this._precio = precio;
-      this._rebaja = rebaja;
+      this._name = name;
+      this._price = price;
+      this._reduced = reduced;
       this._favorite = favorite;
   }
 
@@ -22,39 +21,39 @@ export class ItemShop  {
   }
 
   public getImage(): string{
-    return this._image;
+    return this._image!;
   }
-  public getTitulo(): string{
-    return this._titulo;
+  public getName(): string{
+    return this._name;
   }
 
-  public getPrecio(): number{
-    return this._precio;
+  public getPrice(): number{
+    return this._price;
   }
-  public getRebaja(): number{
-    return this._rebaja;
+  public getReduced(): number{
+    return this._reduced!;
   }
   public getFavorite(): boolean{
-    return this._favorite;
+    return this._favorite!;
   }
 
-  public setIdArt(id: number){
+  public setId(id: number){
     this._id = id;
   }
 
   public setImage(image: string){
     this._image = image;
   }
-  public setTitulo(titulo: string){
-    this._titulo = titulo;
+  public setName(name: string){
+    this._name = name;
   }
 
-  public setPrecio(precio: number){
-    this._precio = precio;
+  public setPrecio(price: number){
+    this._price = price;
   }
 
-  public setRebaja(rebaja: number){
-    this._rebaja = rebaja;
+  public setRebaja(reduced: number){
+    this._reduced = reduced;
   }
   public setFavorite(favorite: boolean){
     this._favorite = favorite;

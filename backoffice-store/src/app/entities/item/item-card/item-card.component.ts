@@ -15,4 +15,5 @@ export class ItemCardComponent {
 
   @Input() article: ItemShop | undefined;
 
+
 }

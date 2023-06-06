@@ -53,6 +53,19 @@
       El valor debe ser positivo
     </small>
   </div>
+ <!-- Oferta: -->
+ <div class="form-group">
+  <label for="reduced">Oferta</label>
+  <input type="number" [(ngModel)]="item.reduced" class="form-control" #reduced="ngModel" id="reduced" name="reduced"  min="0">
+</div>
+<!--Validación del Oferta-->
+<div *ngIf="(reduced.dirty && reduced.errors)">
+  <small class="form-text text-darger"
+  *ngIf="reduced.errors['min']">
+    El valor debe ser positivo
+  </small>
+</div>
+
     <!-- Imagen: -->
     <div class="form-group">
       <label for="image">Imagen</label>

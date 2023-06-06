@@ -9,6 +9,7 @@ public class ItemDTO implements Serializable {
     private String name;
     private String description;
     private Double price;
+    private Integer reduced;
     private byte[] image;
     private Long categoryId;
     private String categoryName;
@@ -71,4 +72,14 @@ public class ItemDTO implements Serializable {
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
+
+    public Integer getReduced() {
+        return reduced;
+    }
+
+    public void setReduced(Integer reduced) {
+        this.reduced = reduced;
+    }
+
+
 }
