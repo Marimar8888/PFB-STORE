@@ -1,5 +1,6 @@
 package com.marimar.store.infraestructure.rest;
 
+import com.marimar.store.application.dto.ItemDTO;
 import com.marimar.store.application.dto.LoginDTO;
 import com.marimar.store.application.dto.UserDTO;
 import com.marimar.store.application.service.UserService;
@@ -44,7 +45,7 @@ public class UserRestController {
         boolean UserNameExist = this.userService.UserNameExist(loginDTO.getUserName());
 
         if (UserNameExist) {
-            UserDTO loginExist = this.userService.loginAuthentication(loginDTO);
+            LoginDTO loginExist = this.userService.loginAuthentication(loginDTO);
             if (loginExist == null) {
                 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             } else {
@@ -53,5 +54,33 @@ public class UserRestController {
         } else {
             return new  ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+    @CrossOrigin
+    @PutMapping(value= "/users/{userName}/favorites/{itemId}", produces = "application/json", consumes = "application/json")
+    public ResponseEntity<List<ItemDTO>> insertItemsInUsers(@PathVariable Long itemId, @PathVariable String userName){
+       boolean insertOk = userService.insertFavoriteByUserIdAndByItemid(userName, itemId);
+       if(insertOk){
+           return new ResponseEntity<>(HttpStatus.OK);
+       }else{
+           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+       }
+    }
+
+    @CrossOrigin
+    @DeleteMapping(value="/users/{userName}/favorites/remove/{itemId}")
+    public ResponseEntity<Void> deleteFavoriteByUserNameAndByItemId(@PathVariable String userName, @PathVariable Long itemId){
+        boolean deleteOk = userService.deleteFavoriteByItemId(userName, itemId);
+        if(deleteOk){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @CrossOrigin
+    @GetMapping(value="/users/{userName}/favorites")
+    public ResponseEntity<List<Long>> getFavoritesByUserName(@PathVariable String username){
+        List<Long> favoritesList = this.userService.getFavoritesByUserName(username);
+        return new ResponseEntity<>(favoritesList, HttpStatus.OK);
     }
 }
