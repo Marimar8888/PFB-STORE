@@ -21,28 +21,16 @@ export class HeaderComponent {
       this.userName = this.cookieService.get('token');
     }else{
       this.session=false;
-
     }
   }
 
-  /*checkLogin(){
-    const token = this.cookieService.get('token');
-    if(token != null ){
-      this.session = true;
-      return true;
-    }else{
-      this.session=false;
-      return false;
-    }
 
-
-  }*/
 
   logOut(){
      this.cookieService.delete('token');
-    // this.checkLogin();
+     localStorage.removeItem('token');
+     this.session = false;
      this.router.navigate(['/login']);
-    //this.authService.logout();
   }
 
 }

@@ -5,33 +5,36 @@
 	height: 50px;
 }
 
-a{
-  text-decoration: none;
-}
+
 
 a{
   color: white;
-}
-input{
-  background-color: black;
-  border: none;
+  text-decoration: none;
+  text-decoration-line: none;
 
 }
+div{
+  display: inline;
+}
 
-#bn_login_name{
+
+#btn_login_name{
   color: $color_3;
+  display: block;
+  text-align: right;
   text-decoration: none;
   text-decoration-line: none;
   font-style: italic;
   float: right;
-  margin: 10px 30px 10px 0px;
+  padding: 10px;
+
 }
 
-.btn_login{
+#btn_login{
   display: block;
   text-align: right;
   color:white;
-
+  padding: 10px;
   border: none;
   text-decoration: none;
   text-decoration-line: none;
@@ -39,12 +42,17 @@ input{
 
 }
 #btn_login_out{
-  color: $color_3;
+  display: block;
+  text-align: right;
+  color:white;
+  padding: 10px;
+  border: none;
   text-decoration: none;
   text-decoration-line: none;
   font-style: italic;
-  float: right;
-  margin: 10px 30px 10px 0px;
+
+  cursor: pointer;
+
 }
 
 
