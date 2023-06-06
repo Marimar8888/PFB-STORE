@@ -47,6 +47,12 @@
         <input type="number" class="form-control" id="precio" formControlName="price">
     </div>
 
+    <!-- Precio -->
+    <div class="form-group">
+        <label for="reduced">Oferta</label>
+        <input type="number" class="form-control" id="reduced" formControlName="reduced">
+    </div>
+
     <!-- Validación price -->
     <div *ngIf="itemForm.get('price')!.errors && itemForm.get('price')!.errors">
         <small class="form-text text-danger" *ngIf="itemForm.get('price')!.errors!['required']!">

@@ -55,7 +55,7 @@
                 {{ item.price }}
             </td>
             <td>
-                <button id="btnEditItem" [routerLink]="['/items',item.id]">Editar Template</button>
+
                 <button id="btnEditReactiveItem" [routerLink]="['/items','reactive',item.id]">Editar reactivo</button>
                 <button id="btnDeleteItem" data-bs-toggle="modal" data-bs-target="#askConfirmationDelete" (click)="prepareItemToDelete(item.id!);">Eliminar</button>
             </td>
