@@ -1,0 +1,71 @@
+@import "src/styles.scss";
+
+img.mat-card-image {
+	width: 100%;
+	height: 100%;
+	padding: 0px;
+	min-height: 220px;
+}
+.mat-mdc-card-content {
+	padding: 0;
+}
+.card-content {
+	padding: 0px 0 5px 0;
+	&:hover {
+		transform: translateY(5px);
+		transition: all 0.5s;
+		background-color: $background-color_5;
+	}
+}
+p.card-title {
+	padding: 10px 5px 0px 5px;
+	font-weight: bold;
+}
+p.card-price {
+	padding: 0px auto 0px;
+}
+div.precio {
+	text-align: center;
+	justify-content: center;
+}
+label.rebaja {
+	color: $color_6;
+	margin-left: 10px;
+	font-size: large;
+	font-weight: bold;
+}
+#group {
+	color: $color_3;
+	>i.fas {
+		color: $color_3;
+		text-decoration: none;
+		font-size: 20px;
+		transition: 0.35s ease-in-out;
+		position: absolute;
+		top: 5px;
+		right: 5px;
+		display: inline-block;
+		&:hover {
+			color: $color_6;
+			text-decoration: none;
+			font-size: 28px;
+			transition: 0.35s ease-in-out;
+			position: absolute;
+		}
+	}
+	>i.favorito {
+		color: $color_6;
+		text-decoration: none;
+		font-size: 28px;
+		transition: 0.35s ease-in-out;
+		position: absolute;
+	}
+}
+a {
+	&:hover {
+		cursor: pointer;
+	}
+}
+.rebajas {
+	text-decoration: line-through;
+}

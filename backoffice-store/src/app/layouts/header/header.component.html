@@ -1,0 +1,18 @@
+<header >
+  <div class="header" >
+    <div class="header" *ngIf="session" >
+      <a  [routerLink]="['/login']"><span id="btn_login"> Identifícate</span></a>
+      </div>
+
+   <!-- <div  [(ngModel)]="session" *ngIf="!session">
+      <a [routerLink]="['login']" class="btn_login_out"  ><span id="btn_login_out"> Identifícate</span></a>
+   </div>
+
+   <input [ngIf]="session" id="btn_login_name" [(ngModel)]="userName"/>
+      <a [ngIf]="session"> <span id="btn_login" (click)="logOut()"> Cerrar Session</span></a>-->
+
+
+    </div>
+</header>
+
+

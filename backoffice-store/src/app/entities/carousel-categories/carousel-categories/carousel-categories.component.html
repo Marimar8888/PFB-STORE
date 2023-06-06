@@ -1,0 +1,63 @@
+<div class="cuerpo-categorias">
+
+  <h1 class="title-banner">Descubre la variedad de prendas y complementos con un solo click!</h1>
+
+  <div id="carousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <ul id="banner" class="banner items carousel-item active" >
+        <li *ngFor="let imagen of imagenesCategoria">
+          <img class="card-img-top" src="{{imagen.getImage()}}" alt="Imagen de una Abrigo">
+        </li>
+      </ul>
+      <ul id="banner" class="banner items carousel-item " >
+        <li *ngFor="let imagen of imagenesCategoria">
+          <img class="card-img-top" src="{{imagen.getImage()}}" alt="Imagen de una Abrigo">
+        </li>
+      </ul>
+      <ul id="banner" class="banner items carousel-item " >
+        <li *ngFor="let imagen of imagenesCategoria">
+          <img class="card-img-top" src="{{imagen.getImage()}}" alt="Imagen de una Abrigo">
+        </li>
+      </ul>
+    </div>
+    <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  <div class="carousel-link">
+      <div class="row">
+        <div class="col">
+          <div class="bg-terciary text-white text-center" >
+            <p class="card-text"><a [routerLink]="['tienda/abrigos']">Abrigos</a></p>
+          </div>
+        </div>
+          <div class="col">
+          <div class="bg-terciary  text-white text-center">
+            <p class="card-text"><a [routerLink]="['tienda/chaquetas']">Chaquetas</a></p>
+          </div>
+        </div>
+        <div class="col">
+          <div class="bg-terciary text-white text-center">
+            <p class="card-text"><a [routerLink]="['tienda/pantalones']">Pantalones</a></p>
+
+          </div>
+        </div>
+        <div class="col">
+          <div class="bg-terciary  text-white text-center">
+            <p class="card-text"><a [routerLink]="['tienda/sport']">Sport</a></p>
+          </div>
+        </div>
+        <div class="col">
+          <div class="bg-terciary text-white text-center">
+            <p class="card-text"><a [routerLink]="['tienda/corbatas']">Corbatas</a></p>
+          </div>
+        </div>
+      </div>
+</div>
+
+

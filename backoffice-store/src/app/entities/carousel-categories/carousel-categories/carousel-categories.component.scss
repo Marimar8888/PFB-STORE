@@ -1,0 +1,63 @@
+@import "src/styles.scss";
+
+div.cuerpo-categorias {
+	background-color: $background-color_4;
+	padding-bottom: 30px;
+}
+.title-banner {
+	color: white;
+	text-align: center;
+	margin-top: 5px;
+	padding: 10px;
+	font-size: 2em;
+}
+div#carousel {
+	width: 65%;
+	margin: 0 auto;
+}
+ul {
+	-webkit-columns: 5;
+	-moz-columns: 5;
+	columns: 5;
+}
+li {
+	list-style: none;
+}
+img {
+	width: 100%;
+	min-height: 160px;
+	position: relative;
+}
+
+div.carousel-link {
+	width: 65%;
+	margin: 0 auto;
+}
+div.row {
+	width: 100%;
+	margin: 0 auto;
+}
+div.col {
+	>div {
+		width: 100%;
+	}
+}
+p.card-text {
+  width: 100%;
+  padding: 0 15px;
+  margin: 5px;
+	a {
+		color: white;
+    text-decoration: none;
+    text-align: center;
+		&:hover {
+			color: $color_4;
+			text-decoration: none;
+			font-size: 16px;
+      transition: ease-in-out 0.29s;
+		}
+		&:active {
+			text-decoration: none;
+		}
+	}
+}

@@ -1,0 +1,49 @@
+<section class="main fadein fadeInLeft section_login">
+  <!-----------------UserName-------------------------------------------------------------------->
+  <div class="login_box rubberBand animated">
+    <form class="login_form" [formGroup]="userForm">
+       <!-- USERNAME -->
+      <div class="form-group">
+        <label class="login_form_label">Introduce tu nombre de usuario:*</label>
+        <input type="text" class="form-control login_form_input-text" id="userName" formControlName="userName">
+      </div>
+      <div *ngIf="(userForm.get('userName')!.dirty && userForm.get('userName')!.errors)">
+        <small class="form-text text-danger"
+          *ngIf="userForm.get('userName')!.errors!['required']">
+          El nombre de usuario es obligatorio
+        </small>
+        <small class="form-text text-danger"
+          *ngIf="userForm.get('userName')!.errors!['minlength']">
+          Tu nombre de usuario debe tener como mínimo 3 carácteres
+        </small>
+        <small class="form-text text-danger"
+          *ngIf="userForm.get('userName')!.errors!['maxlength']">
+          Tu nombre de usuario debe tener como máximo de 15 carácteres
+        </small>
+      </div>
+      <!-- USERNAME -->
+      <!-- PASSWORD -->
+      <div class="form-group">
+        <label class="login_form_label">Introduce un password:*</label>
+        <input type="password" class="form-control login_form_input-text" id="password" formControlName="password" >
+      </div>
+      <div *ngIf="(userForm.get('password')!.dirty && userForm.get('password')!.errors)">
+        <small class="form-text text-danger"
+          *ngIf="userForm.get('password')!.errors!['required']">
+          La contraseña es obligatoria
+        </small>
+        <small class="form-text text-danger"
+          *ngIf="userForm.get('password')!.errors!['minlength']">
+          Tu contraseña debe tener como mínimo 8 carácteres
+        </small>
+      </div>
+      <!-- PASSWORD -->
+      <button type="submit" class="login_button" (click)="saveUser()" [disabled]="userForm.invalid">Log-In</button>
+      <div class="login_form_register">
+        <a class="btn_register" [routerLink]="['/signup']"> Registrate</a>
+      </div>
+    </form>
+  </div>
+  <!-----------------Registrar-------------------------------------------------------------------->
+
+  </section>

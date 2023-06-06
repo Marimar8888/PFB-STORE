@@ -1,0 +1,51 @@
+@import "src/styles.scss";
+
+.header {
+	background-color: $background-color_3;
+	height: 50px;
+}
+
+a{
+  text-decoration: none;
+}
+
+a{
+  color: white;
+}
+input{
+  background-color: black;
+  border: none;
+
+}
+
+#bn_login_name{
+  color: $color_3;
+  text-decoration: none;
+  text-decoration-line: none;
+  font-style: italic;
+  float: right;
+  margin: 10px 30px 10px 0px;
+}
+
+.btn_login{
+  display: block;
+  text-align: right;
+  color:white;
+
+  border: none;
+  text-decoration: none;
+  text-decoration-line: none;
+  font-style: italic;
+
+}
+#btn_login_out{
+  color: $color_3;
+  text-decoration: none;
+  text-decoration-line: none;
+  font-style: italic;
+  float: right;
+  margin: 10px 30px 10px 0px;
+}
+
+
+

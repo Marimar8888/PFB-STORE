@@ -1,0 +1,9 @@
+<h1 class="title-banner">Las mejores prendas y accesorios, están aquí!</h1>
+
+ <ul id="banner" class="banner items" >
+  <li *ngFor="let imagen of imagenesBanner">
+    <img class="card-img-top" src="{{imagen.getImage()}}" alt="Imagen de una Abrigo">
+    <p class="card-text">{{imagen.getTitulo()}}</p>
+   </li>
+
+  </ul>

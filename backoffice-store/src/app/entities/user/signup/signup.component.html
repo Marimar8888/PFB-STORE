@@ -1,0 +1,140 @@
+<section class="main section_signup">
+  <div class="starter-template">
+    <div class="signup_box rubberBand">
+      <form class="signup_form" [formGroup]="userForm" novalidate autocomplete="off">
+          <!-- USERNAME -->
+          <div class="form-group">
+            <label class="signup_form_label">Introduce tu nombre de usuario:*</label>
+            <input type="text" class="form-control signup_form_input-text" id="userName" formControlName="userName" >
+          </div>
+          <div *ngIf="(userForm.get('userName')!.dirty && userForm.get('userName')!.errors)">
+            <small class="form-text text-danger"
+              *ngIf="userForm.get('userName')!.errors!['required']">
+              El nombre de usuario es obligatorio
+            </small>
+            <small class="form-text text-danger"
+              *ngIf="userForm.get('userName')!.errors!['minlength']">
+              Tu nombre de usuario debe tener como mínimo 3 carácteres
+            </small>
+            <small class="form-text text-danger"
+              *ngIf="userForm.get('userName')!.errors!['maxlength']">
+              Tu nombre de usuario debe tener como máximo de 15 carácteres
+            </small>
+          </div>
+        <!-- NAME -->
+        <div class="form-group">
+          <label class="signup_form_label">Introduce tu nombre:*</label>
+          <input type="text" class="form-control signup_form_input-text" id="name" formControlName="name">
+        </div>
+        <div *ngIf="(userForm.get('name')!.dirty && userForm.get('name')!.errors)">
+          <small class="form-text text-danger"
+            *ngIf="userForm.get('name')!.errors!['required']">
+            El nombre es obligatorio
+          </small>
+          <small class="form-text text-danger"
+            *ngIf="userForm.get('name')!.errors!['minlength']">
+            Tu nombre debe tener como mínimo 3 carácteres
+          </small>
+          <small class="form-text text-danger"
+            *ngIf="userForm.get('name')!.errors!['maxlength']">
+            Tu nombre debe tener como  máximo de 50 carácteres
+          </small>
+        </div>
+        <!-- NAME -->
+        <!-- SURNAMES -->
+        <div class="form-group">
+          <label class="signup_form_label">Introduce tus apellidos:*</label>
+          <input type="text" class="form-control signup_form_input-text" id="surNames" formControlName="surNames">
+        </div>
+        <div *ngIf="(userForm.get('surNames')!.dirty && userForm.get('surNames')!.errors)">
+          <small class="form-text text-danger"
+            *ngIf="userForm.get('surNames')!.errors!['required']">
+            Los apellidos son obligatorios
+          </small>
+          <small class="form-text text-danger"
+            *ngIf="userForm.get('surNames')!.errors!['minlength']">
+            Los apellidos deben tener como mínimo 3 carácteres
+          </small>
+          <small class="form-text text-danger"
+            *ngIf="userForm.get('surNames')!.errors!['maxlength']">
+            Los apellidos deben tener como máximo de 100 carácteres
+          </small>
+        </div>
+        <!-- SURNAMES -->
+        <!-- MOVIL -->
+        <div class="form-group">
+          <label class="signup_form_label">Introduce tu móvil:*</label>
+          <input type="text" class="form-control signup_form_input-text" id="phone" formControlName="phone">
+        </div>
+        <div *ngIf="(userForm.get('phone')!.dirty && userForm.get('phone')!.errors)">
+          <small class="form-text text-danger"
+            *ngIf="userForm.get('phone')!.errors!['required']">
+            El móvil es obligatorio
+          </small>
+          <small class="form-text text-danger"
+           *ngIf="userForm.get('phone')!.errors!['pattern']">
+            Formato incorrecto sólo puede contener números.
+          </small>
+          <small class="form-text text-danger"
+            *ngIf="userForm.get('phone')!.errors!['minlength']">
+            Al menos 9 dígitos
+          </small>
+          <small class="form-text text-danger"
+            *ngIf="userForm.get('phone')!.errors!['maxlength']">
+           No puede supuerar 12 dígitos
+          </small>
+        </div>
+        <!-- PHONE -->
+        <!-- EMAIL -->
+        <div class="form-group">
+          <label class="signup_form_label">Introduce tu email:*</label>
+          <input type="email" class="form-control signup_form_input-text" id="email" formControlName="email">
+        </div>
+        <div *ngIf="(userForm.get('email')!.dirty && userForm.get('email')!.errors)">
+          <small class="form-text text-danger"
+            *ngIf="userForm.get('email')!.errors!['required']">
+            El email es obligatorio
+          </small>
+          <small class="form-text text-danger"
+            *ngIf="userForm.get('email')!.errors!['email']">
+            El formato del email no es correcto
+          </small>
+        </div>
+        <!-- EMAIL -->
+        <!-- PASSWORD -->
+        <div class="form-group">
+          <label class="signup_form_label">Introduce un password:*</label>
+          <input type="password" class="form-control signup_form_input-text" id="password" formControlName="password" >
+        </div>
+        <div *ngIf="(userForm.get('password')!.dirty && userForm.get('password')!.errors)">
+          <small class="form-text text-danger"
+            *ngIf="userForm.get('password')!.errors!['required']">
+            La contraseña es obligatoria
+          </small>
+          <small class="form-text text-danger"
+            *ngIf="userForm.get('password')!.errors!['minlength']">
+            Tu contraseña debe tener como mínimo 8 carácteres
+          </small>
+        </div>
+        <!-- PASSWORD -->
+        <!-- REPEAT PASSWORD -->
+        <div class="form-group">
+          <label class="signup_form_label">Introduce un password:*</label>
+          <input type="password" class="form-control signup_form_input-text" id="compassword" formControlName="compassword" >
+        </div>
+        <div *ngIf="(userForm.get('compassword')!.dirty && userForm.get('compassword')!.errors)">
+          <small class="form-text text-danger"
+            *ngIf="userForm.get('compassword')!.errors!['required']">
+            Debe introducir de nuevo la misma contraseña
+          </small>
+          <small class="form-text text-danger"
+          *ngIf="userForm.get('compassword')!.errors!['confirmedValidator']">
+            La contraseña no coincide
+        </small>
+        </div>
+        <!-- REPEAT PASSWORD -->
+        <button type="submit"  class="signup_button" (click)="saveUser()" [disabled]="userForm.invalid">Guardar</button>
+      </form>
+    </div>
+  </div>
+</section>
