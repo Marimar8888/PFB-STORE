@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Item } from '../modelo/item.model';
 import { IItemShop } from '../interface/itemShop.interface';
+import { ItemShop } from '../modelo/itemShop.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { IItemShop } from '../interface/itemShop.interface';
 export class ItemService {
 
 
+  private urlShop: string = "http://localhost:8080/store/categories/";
 
   constructor(private httpClient: HttpClient   ) { }
 
@@ -21,11 +23,16 @@ export class ItemService {
     return this.httpClient.get<Item[]>(urlEndpoint);
   }
 
+
   public getAllItemsShop(): Observable<Item[]>{
     let urlEndpoint: string = "http://localhost:8080/store/items";
     return this.httpClient.get<Item[]>(urlEndpoint);
   }
 
+  public getAllItemsByCategoryId(categoryId: number): Observable<IItemShop[]>{
+    let urlShopCoats : string =  "http://localhost:8080/store/categories/" + categoryId + "/items";
+    return this.httpClient.get<IItemShop[]>(urlShopCoats);
+  }
 
   public deleteItem(itemIdToDelete: number): Observable<any> {
     let urlEndpoint: string = "http://localhost:8080/store/items/" + itemIdToDelete;
@@ -47,33 +54,6 @@ export class ItemService {
     return this.httpClient.patch<Item>(urlEndpoint, item);
   }
 
-  //Mockoon
-
-  public obternerArticulos(): Observable<IItemShop[]> {
-    const url: string = 'http://localhost:3003/articulos';
-    return this.httpClient.get<IItemShop[]>(url);
-}
-public obternerAbrigos(): Observable<IItemShop[]> {
-  const url: string = 'http://localhost:3005/articulos/abrigos';
-  return this.httpClient.get<IItemShop[]>(url);
-}
-public obternerChaquetas(): Observable<IItemShop[]> {
-  const url: string = 'http://localhost:3009/articulos/chaquetas';
-  return this.httpClient.get<IItemShop[]>(url);
-}
-public obternerPantalones(): Observable<IItemShop[]> {
-  const url: string = 'http://localhost:3006/articulos/pantalones';
-  return this.httpClient.get<IItemShop[]>(url);
-}
-public obternerSports(): Observable<IItemShop[]> {
-  const url: string = 'http://localhost:3007/articulos/sports';
-  return this.httpClient.get<IItemShop[]>(url);
-}
-/*public obternerFichas(): Observable<IItemDetails[]> {
-  const url: string = 'http://localhost:3011/articulos/fichas';
-  return this.httpClient.get<IItemDetails[]>(url);
-}
-*/
 
 
 }

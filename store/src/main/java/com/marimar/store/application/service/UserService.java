@@ -1,5 +1,6 @@
 package com.marimar.store.application.service;
 
+import com.marimar.store.application.dto.ItemDTO;
 import com.marimar.store.application.dto.LoginDTO;
 import com.marimar.store.application.dto.UserDTO;
 
@@ -18,5 +19,10 @@ public interface UserService {
 
     boolean UserNameExist(String userName);
 
-    UserDTO loginAuthentication(LoginDTO loginDTO);
+    LoginDTO loginAuthentication(LoginDTO loginDTO);
+    List<Long> getFavoritesByUserName(String userName);
+
+    boolean insertFavoriteByUserIdAndByItemid(String userName, Long itemId);
+
+    boolean deleteFavoriteByItemId(String userName, Long itemId);
 }

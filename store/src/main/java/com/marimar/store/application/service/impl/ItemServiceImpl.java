@@ -1,7 +1,9 @@
 package com.marimar.store.application.service.impl;
 
 import com.marimar.store.application.dto.ItemDTO;
+import com.marimar.store.application.dto.ItemShopDTO;
 import com.marimar.store.application.mapper.ItemMapper;
+import com.marimar.store.application.mapper.ItemShopMapper;
 import com.marimar.store.application.service.ItemService;
 import com.marimar.store.domain.entity.Item;
 import com.marimar.store.domain.persistance.ItemPersistance;
@@ -16,10 +18,12 @@ import java.util.Optional;
 public class ItemServiceImpl implements ItemService {
     private final ItemPersistance itemPersistance;
     private final ItemMapper itemMapper;
+    private final ItemShopMapper itemShopMapper;
 
-    public ItemServiceImpl(ItemPersistance itemPersistance, ItemMapper itemMapper) {
+    public ItemServiceImpl(ItemPersistance itemPersistance, ItemMapper itemMapper, ItemShopMapper itemShopMapper) {
         this.itemPersistance = itemPersistance;
         this.itemMapper = itemMapper;
+        this.itemShopMapper = itemShopMapper;
     }
 
     @Override
@@ -29,9 +33,9 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemDTO> getAllItemsByCategory(Long categoryId) {
+    public List<ItemShopDTO> getAllItemsByCategory(Long categoryId) {
         List<Item> items = this.itemPersistance.getAllItemsByCategory(categoryId);
-        return this.itemMapper.toDto(items);
+        return this.itemShopMapper.toDto(items);
     }
 
     @Override

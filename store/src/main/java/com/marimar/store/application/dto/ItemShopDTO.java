@@ -1,39 +1,18 @@
-package com.marimar.store.domain.entity;
+package com.marimar.store.application.dto;
 
-import javax.persistence.*;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
+import java.io.Serializable;
 
-@Entity
-@Table(name ="items")
-public class Item {
+public class ItemShopDTO implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "itemSequence")
     private Long id;
-
-    @Column(length = 100, nullable = false)
-    @Size(min = 3, max = 100)
     private String name;
-
-    @Column(length = 2000)
     private String description;
-
-    @Column(nullable = false)
-    @Positive
     private Double price;
-    @Positive
     private Integer reduced;
-
-    @Lob
     private byte[] image;
 
-    @ManyToOne()
-    @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
 
-    public Item() {
-    }
+    public ItemShopDTO() {     }
 
     public Long getId() {
         return id;
@@ -75,20 +54,9 @@ public class Item {
         this.image = image;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public Integer getReduced() {
-        return reduced;
-    }
+    public Integer getReduced() { return reduced;   }
 
     public void setReduced(Integer reduced) {
         this.reduced = reduced;
     }
-
 }

@@ -40,6 +40,7 @@
         <th>Imagen</th>
         <th>Artículo</th>
         <th>Precio</th>
+        <th>Oferta</th>
         <th>Acciones</th>
     </thead>
     <tbody>
@@ -55,7 +56,10 @@
                 {{ item.price }}
             </td>
             <td>
-                <button id="btnEditItem" [routerLink]="['/items',item.id]">Editar Template</button>
+              {{ item.reduced }}
+           </td>
+            <td>
+
                 <button id="btnEditReactiveItem" [routerLink]="['/items','reactive',item.id]">Editar reactivo</button>
                 <button id="btnDeleteItem" data-bs-toggle="modal" data-bs-target="#askConfirmationDelete" (click)="prepareItemToDelete(item.id!);">Eliminar</button>
             </td>

@@ -3,6 +3,7 @@ package com.marimar.store.application.dto;
 import javax.persistence.Column;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Set;
 
 public class UserDTO implements Serializable {
     private Long id;
@@ -13,6 +14,8 @@ public class UserDTO implements Serializable {
     private String email;
     private String password;
     private String rol;
+
+    private Set<ItemDTO> favorites;
 
     public UserDTO() {    }
 
@@ -78,5 +81,13 @@ public class UserDTO implements Serializable {
 
     public void setRol(String rol) {
         this.rol = rol;
+    }
+
+    public Set<ItemDTO> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(Set<ItemDTO> favorites) {
+        this.favorites = favorites;
     }
 }

@@ -39,7 +39,7 @@ public class UserPersistanceImpl implements UserPersistance {
 
     }
     @Override
-    public User getUserByUserName(String userName) {
+    public List<User> getUserByUserName(String userName) {
         return this.userRepository.findByUserName(userName);
     }
 }
