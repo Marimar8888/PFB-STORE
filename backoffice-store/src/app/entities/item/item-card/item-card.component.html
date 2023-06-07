@@ -1,5 +1,5 @@
 <section >
-  <mat-card-content class="card-content" *ngIf="article" [routerLink]="['/ficha', article.getId()]">
+  <mat-card-content class="card-content" *ngIf="article" >
 
   <a><img class="mat-card-image" [src]="'data:image/webp;base64,' + article.getImage()" [alt]="article.getName()">
 
@@ -13,7 +13,7 @@
         </ng-template>
     </div></a>
     <div id="group">
-      <i class="fas fa-heart" [ngClass]="{'favorito':article.getFavorite()}"></i>
+      <i class="fas fa-heart" [ngClass]="{'favorito':article.getFavorite()}" (click)="setFavorite(article)"></i>
     </div>
   </mat-card-content>
 

@@ -55,17 +55,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void deleteUser(long idUser) {
         this.userPersistance.deleteUser(idUser);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public LoginDTO loginAuthentication(LoginDTO loginDTO) {
         String userName = loginDTO.getUserName();
-        User user = this.userPersistance.getUserByUserName(userName);
+        List<User> userList = this.userPersistance.getUserByUserName(userName);
+        User user = userList.get(0);
         String password = loginDTO.getPassword();
         String passwordEncrypt = Encrypter.getMD5(password);
-
         if (passwordEncrypt.equals(user.getPassword())) {
             return loginDTO;
         } else {
@@ -74,9 +76,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean UserNameExist(String userName) {
-        User user = this.userPersistance.getUserByUserName(userName);
-        if (user == null) {
+        List<User> userList = this.userPersistance.getUserByUserName(userName);
+        if (userList.isEmpty()) {
             return false;
         }
         return true;
@@ -85,8 +88,10 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public List<Long> getFavoritesByUserName(String userName) {
-        UserDTO userDTO = mapper.toDto(userPersistance.getUserByUserName(userName));
-        if (userDTO != null) {
+        List<UserDTO> userDTOList = mapper.toDto(userPersistance.getUserByUserName(userName));
+        UserDTO userDTO;
+        if (!userDTOList.isEmpty()) {
+            userDTO = userDTOList.get(0);
             return userDTO.getFavorites().stream()
                     .map(ItemDTO::getId)
                     .collect(Collectors.toList());
@@ -99,8 +104,9 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public boolean insertFavoriteByUserIdAndByItemid(String userName, Long itemId) {
-        UserDTO userDto = this.mapper.toDto(userPersistance.getUserByUserName(userName));
-        if (userDto != null) {
+        List <UserDTO> userDtoList = this.mapper.toDto(userPersistance.getUserByUserName(userName));
+        if (!userDtoList.isEmpty()) {
+            UserDTO userDto = userDtoList.get(0);
             Optional<Item> items = itemPersistance.getItemById(itemId);
             if (items.isPresent()) {
                 Item itemNewFav = items.get();
@@ -117,8 +123,9 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public boolean deleteFavoriteByItemId(String userName, Long itemId) {
-        User user = userPersistance.getUserByUserName(userName);
-        if (user != null) {
+        List<User> userList = userPersistance.getUserByUserName(userName);
+        if (!userList.isEmpty()) {
+            User user = userList.get(0);
             Optional<Item> items = itemPersistance.getItemById(itemId);
             if (items.isPresent()) {
                 Item itemRemoveFav = items.get();

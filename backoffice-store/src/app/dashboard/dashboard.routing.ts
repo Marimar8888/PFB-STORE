@@ -20,8 +20,8 @@ const dashboardRoutes: Routes = [
   {path: 'shop/coats', component: CoatsComponent },
   {path: 'shop/jackets', component: JacketsComponent },
   {path: 'shop/pants', component: PantsComponent },
-  {path: 'shop/sports', component: SportsComponent },
-  //{path: 'ficha/:id', component: ItemDetailsFileComponent }
+  {path: 'shop/sports', component: SportsComponent }
+
 ];
 
 @NgModule({

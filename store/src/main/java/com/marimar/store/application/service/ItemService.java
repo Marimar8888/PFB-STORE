@@ -1,6 +1,7 @@
 package com.marimar.store.application.service;
 
 import com.marimar.store.application.dto.ItemDTO;
+import com.marimar.store.application.dto.ItemShopDTO;
 import com.marimar.store.domain.entity.Item;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,7 +11,7 @@ import java.util.Optional;
 
 public interface ItemService {
     List<ItemDTO> getAllItems();
-    List<ItemDTO> getAllItemsByCategory(Long categoryId);
+    List<ItemShopDTO> getAllItemsByCategory(Long categoryId);
     Optional<ItemDTO> getItemById(Long itemId);
     ItemDTO saveItem(ItemDTO item);
     void deleteItem(Long itemId);

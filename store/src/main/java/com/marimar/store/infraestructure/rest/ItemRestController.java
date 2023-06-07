@@ -1,6 +1,7 @@
 package com.marimar.store.infraestructure.rest;
 
 import com.marimar.store.application.dto.ItemDTO;
+import com.marimar.store.application.dto.ItemShopDTO;
 import com.marimar.store.application.service.ItemService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -28,8 +29,8 @@ public class ItemRestController {
     }
     @CrossOrigin
     @GetMapping(value = "/categories/{idCategory}/items", produces = "application/json")
-    ResponseEntity<List<ItemDTO>> getAllItemsFromCategory(@PathVariable Long idCategory){
-        List<ItemDTO> items = this.itemService.getAllItemsByCategory(idCategory);
+    ResponseEntity<List<ItemShopDTO>> getAllItemsFromCategory(@PathVariable Long idCategory){
+        List<ItemShopDTO> items = this.itemService.getAllItemsByCategory(idCategory);
         return new ResponseEntity<>(items, HttpStatus.OK);
     }
 

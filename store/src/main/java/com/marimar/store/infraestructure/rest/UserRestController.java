@@ -19,6 +19,14 @@ public class UserRestController {
         this.userService = userService;
     }
 
+
+    @CrossOrigin
+    @GetMapping(value="/users/{userName}/favorites")
+    public ResponseEntity<List<Long>> getFavoritesByUserName(@PathVariable String userName){
+        List<Long> favoritesList = this.userService.getFavoritesByUserName(userName);
+        return new ResponseEntity<>(favoritesList, HttpStatus.OK);
+    }
+
     @CrossOrigin
     @GetMapping(value = "/users", produces = "application/json")
     ResponseEntity<List<UserDTO>> getAllUsers(){
@@ -56,9 +64,10 @@ public class UserRestController {
         }
     }
     @CrossOrigin
-    @PutMapping(value= "/users/{userName}/favorites/{itemId}", produces = "application/json", consumes = "application/json")
-    public ResponseEntity<List<ItemDTO>> insertItemsInUsers(@PathVariable Long itemId, @PathVariable String userName){
+    @PutMapping(value= "/users/{userName}/favorites/{itemId}")
+    public ResponseEntity<List<Long>> insertItemsInUsers(@PathVariable Long itemId, @PathVariable String userName){
        boolean insertOk = userService.insertFavoriteByUserIdAndByItemid(userName, itemId);
+
        if(insertOk){
            return new ResponseEntity<>(HttpStatus.OK);
        }else{
@@ -77,10 +86,4 @@ public class UserRestController {
         }
     }
 
-    @CrossOrigin
-    @GetMapping(value="/users/{userName}/favorites")
-    public ResponseEntity<List<Long>> getFavoritesByUserName(@PathVariable String username){
-        List<Long> favoritesList = this.userService.getFavoritesByUserName(username);
-        return new ResponseEntity<>(favoritesList, HttpStatus.OK);
-    }
 }

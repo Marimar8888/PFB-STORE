@@ -10,6 +10,7 @@ import { ItemShop } from '../modelo/itemShop.model';
 })
 export class ItemService {
 
+
   private urlShop: string = "http://localhost:8080/store/categories/";
 
   constructor(private httpClient: HttpClient   ) { }
@@ -22,13 +23,14 @@ export class ItemService {
     return this.httpClient.get<Item[]>(urlEndpoint);
   }
 
+
   public getAllItemsShop(): Observable<Item[]>{
     let urlEndpoint: string = "http://localhost:8080/store/items";
     return this.httpClient.get<Item[]>(urlEndpoint);
   }
 
   public getAllItemsByCategoryId(categoryId: number): Observable<IItemShop[]>{
-    let urlShopCoats : string =  this.urlShop + categoryId + "/items";
+    let urlShopCoats : string =  "http://localhost:8080/store/categories/" + categoryId + "/items";
     return this.httpClient.get<IItemShop[]>(urlShopCoats);
   }
 

@@ -4,6 +4,6 @@ export interface IItemShop{
   price: number;
   reduced: number;
   image: string;
-  favorite: boolean;
+  favorite?: boolean;
 
 }

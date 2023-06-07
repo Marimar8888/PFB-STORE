@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 import { DashboardRoutingModule } from './dashboard.routing';
-import { ItemComponent } from './item/item.component';
 import { ShopComponent } from './shop/shop.component';
 import { CategoryComponent } from './category/category.component';
 import { EntitiesModule } from '../entities/entities.module';
@@ -18,7 +17,6 @@ import { NavCategoriesComponent } from '../layouts/nav-categories/nav-categories
 @NgModule({
   declarations: [
     HomeComponent,
-    ItemComponent,
     ShopComponent,
     CategoryComponent,
     CoatsComponent,
