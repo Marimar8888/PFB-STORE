@@ -6,6 +6,7 @@ import { ItemShop } from '../modelo/itemShop.model';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from '../../user/service/user.service';
 import { Router } from '@angular/router';
+import { ShopCartService } from '../../shop-cart/service/shopCart.service';
 registerLocaleData(localeEs, 'es');
 
 
@@ -15,7 +16,6 @@ registerLocaleData(localeEs, 'es');
   styleUrls: ['./item-card.component.scss']
 })
 export class ItemCardComponent implements OnInit {
-
 
   @Input() article: ItemShop | undefined;
   token?: any;
@@ -27,6 +27,7 @@ export class ItemCardComponent implements OnInit {
               private router: Router,
               private location: Location,
               private userService: UserService,
+              private shopCartService: ShopCartService
                 ){}
 
   ngOnInit(): void {
@@ -74,11 +75,9 @@ export class ItemCardComponent implements OnInit {
 
    }
 
-  private getFinalUrl() {
-    const url = this.location.path();
-    const finalUrl = url.substring(url.lastIndexOf('/') + 1);
-    return finalUrl;
-  }
+   addToCart(){
+      this.shopCartService.insert.emit(this.article )
+   }
 
   private gestionarError(err: any) {
     console.log(err);

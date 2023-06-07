@@ -12,6 +12,7 @@ import { JacketsComponent } from './shop/jackets/jackets.component';
 import { PantsComponent } from './shop/pants/pants.component';
 import { SportsComponent } from './shop/sports/sports.component';
 import { NavCategoriesComponent } from '../layouts/nav-categories/nav-categories.component';
+import { ShopCartComponent } from './shop-cart/shop-cart.component';
 
 
 @NgModule({
@@ -23,8 +24,8 @@ import { NavCategoriesComponent } from '../layouts/nav-categories/nav-categories
     JacketsComponent,
     PantsComponent,
     SportsComponent,
-    NavCategoriesComponent
-
+    NavCategoriesComponent,
+    ShopCartComponent
 
   ],
   imports: [
