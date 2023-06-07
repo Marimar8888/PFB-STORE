@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { ItemShop } from 'src/app/entities/item/modelo/itemShop.model';
 import { ItemService } from 'src/app/entities/item/service/item.service';
-import { IFavorites } from 'src/app/entities/user/interface/favorites.interface';
 import { UserService } from 'src/app/entities/user/service/user.service';
 
 @Component({
