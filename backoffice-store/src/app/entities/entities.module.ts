@@ -22,6 +22,7 @@ import { SignupComponent } from './user/signup/signup.component';
 import { UserCardComponent } from './user/user-card/user-card.component';
 import { UserService } from './user/service/user.service';
 import { ShopCartComponent } from '../dashboard/shop-cart/shop-cart.component';
+import { OrderComponent } from './order/order.component';
 
 
 
@@ -34,7 +35,8 @@ import { ShopCartComponent } from '../dashboard/shop-cart/shop-cart.component';
     ItemCardComponent,
     LoginComponent,
     SignupComponent,
-    UserCardComponent
+    UserCardComponent,
+    OrderComponent
 
 
   ],
@@ -47,6 +49,7 @@ import { ShopCartComponent } from '../dashboard/shop-cart/shop-cart.component';
     UserCardComponent,
     LoginComponent,
     SignupComponent,
+    OrderComponent,
     MatCardModule
 
   ],
