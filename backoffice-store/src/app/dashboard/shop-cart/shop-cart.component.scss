@@ -1,0 +1,62 @@
+@import "src/styles.scss";
+
+.carrito-container {
+  position: fixed;
+  right: 17%;
+  top: 20%;
+
+}
+
+.carrito-btn {
+  padding: 10px;
+  background-color: #428bca;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.carrito-content {
+  padding: 10px;
+  background-color: $background-color_2;
+  border: 1px solid #ddd;
+  margin-top: 10px;
+}
+
+.cart-count{
+  color: w;
+  font-style: bold;
+  background-color: $background-color_8;
+  padding: 2px;
+  border-radius: 50%;
+}
+
+.details{
+  padding: 0px;
+}
+
+.center-button {
+  display: flex;
+  justify-content: center;
+
+}
+
+.center-button .btn-primary {
+  margin: 0 auto;
+}
+
+.btn-danger{
+  padding: 3px;
+
+}
+
+.btn-primary{
+
+}
+.total{
+  margin: 10px;
+  text-align: center;
+  font-size: 2em;
+  font-style: bold;
+  color: $color_7;
+}
+

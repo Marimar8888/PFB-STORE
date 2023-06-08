@@ -21,6 +21,7 @@ import { LoginComponent } from './user/login/login.component';
 import { SignupComponent } from './user/signup/signup.component';
 import { UserCardComponent } from './user/user-card/user-card.component';
 import { UserService } from './user/service/user.service';
+import { ShopCartComponent } from '../dashboard/shop-cart/shop-cart.component';
 
 
 
@@ -33,7 +34,8 @@ import { UserService } from './user/service/user.service';
     ItemCardComponent,
     LoginComponent,
     SignupComponent,
-    UserCardComponent,
+    UserCardComponent
+
 
   ],
   exports:[
@@ -46,6 +48,7 @@ import { UserService } from './user/service/user.service';
     LoginComponent,
     SignupComponent,
     MatCardModule
+
   ],
   imports: [
     CommonModule,
@@ -59,7 +62,8 @@ import { UserService } from './user/service/user.service';
     UserService,
     CarouselService,
     CarouselCategoriesService,
-    BannerService
+    BannerService,
+    ShopCartComponent
   ]
 })
 export class EntitiesModule { }

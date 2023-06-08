@@ -16,5 +16,8 @@
       <i class="fas fa-heart" [ngClass]="{'favorito':article.getFavorite()}" (click)="setFavorite(article)"></i>
     </div>
   </mat-card-content>
-
   </section>
+  <div>
+    <button class="btn btn-primary" (click)="addToCart()">Añadir al carrito</button>
+  </div>
+
