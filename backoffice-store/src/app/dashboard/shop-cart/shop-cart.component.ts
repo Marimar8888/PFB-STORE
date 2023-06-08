@@ -11,7 +11,7 @@ import { ShopCartService } from 'src/app/entities/shop-cart/service/shopCart.ser
 export class ShopCartComponent implements OnInit {
 
   carritoVisible = false;
-  products: ItemCart[] = [];
+  products: ItemCart[]=[];
   total: number =0;
   pay: number = 0;
   state: boolean = false;
@@ -22,8 +22,11 @@ export class ShopCartComponent implements OnInit {
 
   ngOnInit() {
 
-
-      this.shopCartService.listCart;
+     if (this.shopCartService.listCart){
+      this.shopCartService.listCart.forEach( data =>{
+        this.addCart(data);
+      })
+     }
 
 
       this.shopCartService.insert.subscribe( data => {
@@ -76,6 +79,18 @@ export class ShopCartComponent implements OnInit {
       quantity: 1
       };
       this.products.push(newProduct);
+  }
+
+  addCart(data: ItemCart){
+      const newProduct: ItemCart = {
+        id: data.id,
+        name: data.name,
+        image: data.image,
+        price: data.price,
+        reduced: data.reduced,
+        quantity: data.quantity
+       };
+        this.products.push(newProduct);
   }
 
   removeFromCart(product: ItemCart) {
