@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ItemShop } from 'src/app/entities/item/modelo/itemShop.model';
+import { ItemOrder } from 'src/app/entities/order/model/order.model';
+import { OrderService } from 'src/app/entities/order/service/order.service';
 import { ItemCart } from 'src/app/entities/shop-cart/interface/itemCart.interface';
 import { ShopCartService } from 'src/app/entities/shop-cart/service/shopCart.service';
 
@@ -10,26 +12,31 @@ import { ShopCartService } from 'src/app/entities/shop-cart/service/shopCart.ser
 })
 export class ShopCartComponent implements OnInit {
 
+
   carritoVisible = false;
   products: ItemCart[]=[];
+  productsOrder: ItemOrder[]=[];
   total: number =0;
   pay: number = 0;
   state: boolean = false;
 
-  constructor(private shopCartService: ShopCartService){
-
-  }
+  constructor( private shopCartService: ShopCartService, private orderService: OrderService){   }
 
   ngOnInit() {
+    if(this.orderService.listOrder){
+      this.orderService.listOrder.forEach( data =>{
+        this.addCartFromOrder(data);
+        this.updateSharedVariableFromOrder(this.productsOrder);
+      })
+    }
 
      if (this.shopCartService.listCart){
       this.shopCartService.listCart.forEach( data =>{
         this.addCart(data);
+        this.updateSharedVariable(this.products);
       })
      }
-
-
-      this.shopCartService.insert.subscribe( data => {
+     this.shopCartService.insert.subscribe( data => {
         this.state = false;
 
         if(this.products.length==0){
@@ -80,6 +87,14 @@ export class ShopCartComponent implements OnInit {
       };
       this.products.push(newProduct);
   }
+  addCartFromOrder(data: ItemOrder){
+   // const newProduct: ItemOrder = {
+     // const newProduct: ItemOrder =  new ItemOrder(data.id, data.name, data.price, data.reduced, data.image, data.quantity, this.subtotal);
+
+   // };
+     // this.productsOrder.push(newProduct);
+}
+
 
   addCart(data: ItemCart){
       const newProduct: ItemCart = {
@@ -107,6 +122,11 @@ export class ShopCartComponent implements OnInit {
   updateSharedVariable(products: ItemCart[]){
     this.shopCartService.listCart = products;
   }
-
+  updateSharedVariableFromOrder(products: ItemOrder[]){
+    this.orderService.listOrder = products;
+  }
+  addToOrder(){
+      this.shopCartService.listCart = this.products;
+  }
 
 }

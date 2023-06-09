@@ -22,7 +22,7 @@ import { SignupComponent } from './user/signup/signup.component';
 import { UserCardComponent } from './user/user-card/user-card.component';
 import { UserService } from './user/service/user.service';
 import { ShopCartComponent } from '../dashboard/shop-cart/shop-cart.component';
-import { OrderComponent } from './order/order.component';
+import { OrderService } from './order/service/order.service';
 
 
 
@@ -35,8 +35,7 @@ import { OrderComponent } from './order/order.component';
     ItemCardComponent,
     LoginComponent,
     SignupComponent,
-    UserCardComponent,
-    OrderComponent
+    UserCardComponent
 
 
   ],
@@ -49,9 +48,7 @@ import { OrderComponent } from './order/order.component';
     UserCardComponent,
     LoginComponent,
     SignupComponent,
-    OrderComponent,
     MatCardModule
-
   ],
   imports: [
     CommonModule,
@@ -66,7 +63,9 @@ import { OrderComponent } from './order/order.component';
     CarouselService,
     CarouselCategoriesService,
     BannerService,
-    ShopCartComponent
+    ShopCartComponent,
+    OrderService
+
   ]
 })
 export class EntitiesModule { }

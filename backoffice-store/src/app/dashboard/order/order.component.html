@@ -1,0 +1,38 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Total</th>
+        <th scope="col">Imagen</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of orderList">
+        <td>{{ item.getId() }}</td>
+        <td>{{ item.getName() }}</td>
+        <td >{{ item.getPrice() }}</td>
+        <td>{{ item.getQuantity() }}</td>
+        <td>{{item.getSubtotal()}}</td>
+        <td><img width="50px" height="50px"  [src]="'data:image/webp;base64,' + item.getImage() " alt="Product Image"></td>
+        <td>
+          <button (click)="removeFromOrder(item)" class="btn btn-sm btn-danger">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4">Total:</td>
+        <td>{{ total }} €</td>
+        <td></td>
+      </tr>
+
+    </tfoot>
+    </table>
+    <td class="process">
+      <button id="process" [routerLink]="['/order']" class="btn btn-primary" (click)="process()">TRAMITAR</button>
+  </div>

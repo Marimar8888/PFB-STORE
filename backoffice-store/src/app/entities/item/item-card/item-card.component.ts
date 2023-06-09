@@ -76,7 +76,7 @@ export class ItemCardComponent implements OnInit {
    }
 
    addToCart(){
-      this.shopCartService.insert.emit(this.article )
+      this.shopCartService.insert.emit(this.article);
    }
 
   private gestionarError(err: any) {
