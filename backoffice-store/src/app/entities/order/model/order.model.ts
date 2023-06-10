@@ -1,4 +1,4 @@
-export class ItemCart  {
+export class ItemOrder  {
 
   private _id: number;
   private _name: string;
@@ -6,17 +6,17 @@ export class ItemCart  {
   private _reduced?: number;
   private _image?: string;
   private _quantity?: number;
-  private _subtotal?: number;
+  private _subTotal?: number;
 
 
-  constructor(id: number, name:string, price: number, reduced?: number, image?: string, quantity?: number, subtotal?: number) {
+  constructor(id: number, name:string, price: number, reduced?: number, image?: string, quantity?: number, subTotal?: number) {
       this._id = id;
       this._image = image;
       this._name = name;
       this._price = price;
       this._reduced = reduced;
       this._quantity = quantity;
-      this._subtotal =subtotal;
+      this._subTotal = subTotal;
   }
 
   public getId(): number{
@@ -40,7 +40,7 @@ export class ItemCart  {
     return this._quantity!;
   }
   public getSubtotal(): number{
-    return this._subtotal!;
+    return this._subTotal!;
   }
 
   public setId(id: number){
@@ -65,8 +65,9 @@ export class ItemCart  {
   public setQuantity(quantity: number){
     this._quantity = quantity;
   }
-  public setSutotal(subtotal: number){
-    this._subtotal = subtotal;
+
+  public setTotal(subTotal: number){
+    this._subTotal = subTotal;
   }
 
 
