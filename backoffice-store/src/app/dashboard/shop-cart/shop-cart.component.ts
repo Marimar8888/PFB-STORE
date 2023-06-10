@@ -1,7 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ItemShop } from 'src/app/entities/item/modelo/itemShop.model';
 import { ItemOrder } from 'src/app/entities/order/model/order.model';
-import { OrderService } from 'src/app/entities/order/service/order.service';
 import { ItemCart } from 'src/app/entities/shop-cart/interface/itemCart.interface';
 import { ShopCartService } from 'src/app/entities/shop-cart/service/shopCart.service';
 
@@ -12,7 +11,7 @@ import { ShopCartService } from 'src/app/entities/shop-cart/service/shopCart.ser
 })
 export class ShopCartComponent implements OnInit {
 
-
+  @Input() listOrder: ItemCart[]=[];
   carritoVisible = false;
   products: ItemCart[]=[];
   productsOrder: ItemOrder[]=[];
@@ -24,14 +23,15 @@ export class ShopCartComponent implements OnInit {
 
   ngOnInit() {
 
-     if (this.shopCartService.listCart){
-      this.shopCartService.listCart.forEach( data =>{
-        this.addCart(data);
-        this.updateSharedVariable(this.products);
-        this.calculatePay(this.products);
-      })
-     }
-     this.shopCartService.insert.subscribe( data => {
+      if (this.shopCartService.listCart){
+        this.shopCartService.listCart.forEach( data =>{
+          this.addCart(data);
+          this.updateSharedVariable(this.products);
+          this.calculatePay(this.products);
+        })
+       }
+
+    this.shopCartService.insertCart.subscribe( data => {
         this.state = false;
         if(this.products.length==0){
           this.addProduct(data);
@@ -81,13 +81,6 @@ export class ShopCartComponent implements OnInit {
       };
       this.products.push(newProduct);
   }
-  addCartFromOrder(data: ItemOrder){
-   // const newProduct: ItemOrder = {
-     // const newProduct: ItemOrder =  new ItemOrder(data.id, data.name, data.price, data.reduced, data.image, data.quantity, this.subtotal);
-
-   // };
-     // this.productsOrder.push(newProduct);
-}
 
 
   addCart(data: ItemCart){
@@ -119,6 +112,11 @@ export class ShopCartComponent implements OnInit {
 
   addToOrder(){
       this.shopCartService.listCart = this.products;
+  }
+
+  updateListOrder(list: ItemCart[]): void {
+    this.listOrder = list;
+
   }
 
 }
