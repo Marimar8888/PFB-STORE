@@ -22,7 +22,7 @@ export class OrderComponent implements OnInit {
        const newProduct: ItemCart =  new ItemCart(data.id, data.name, data.price, data.reduced, data.image, data.quantity, data.subtotal);
        this.products.push(newProduct);
       } )
-    //  this.updateSharedVariable(this.products)
+      this.updateSharedVariable(this.products)
       this.calculatePay(this.products);
     }
   }
@@ -45,6 +45,9 @@ export class OrderComponent implements OnInit {
         this.total! += item.getSubtotal();
       });
         return this.total;
+    }
+    updateSharedVariable(products: ItemCart[]){
+     // this.shopService.listCart = products;
     }
 
   }
