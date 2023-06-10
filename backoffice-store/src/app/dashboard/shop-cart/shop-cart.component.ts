@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ItemShop } from 'src/app/entities/item/modelo/itemShop.model';
+import { ItemOrder } from 'src/app/entities/order/model/order.model';
 import { ItemCart } from 'src/app/entities/shop-cart/interface/itemCart.interface';
 import { ShopCartService } from 'src/app/entities/shop-cart/service/shopCart.service';
 
@@ -10,35 +11,34 @@ import { ShopCartService } from 'src/app/entities/shop-cart/service/shopCart.ser
 })
 export class ShopCartComponent implements OnInit {
 
+  @Input() listOrder: ItemCart[]=[];
   carritoVisible = false;
   products: ItemCart[]=[];
+  productsOrder: ItemOrder[]=[];
   total: number =0;
   pay: number = 0;
   state: boolean = false;
 
-  constructor(private shopCartService: ShopCartService){
-
-  }
+  constructor( private shopCartService: ShopCartService){   }
 
   ngOnInit() {
 
-     if (this.shopCartService.listCart){
-      this.shopCartService.listCart.forEach( data =>{
-        this.addCart(data);
-      })
-     }
+      if (this.shopCartService.listCart){
+        this.shopCartService.listCart.forEach( data =>{
+          this.addCart(data);
+          this.updateSharedVariable(this.products);
+          this.calculatePay(this.products);
+        })
+       }
 
-
-      this.shopCartService.insert.subscribe( data => {
+    this.shopCartService.insertCart.subscribe( data => {
         this.state = false;
-
         if(this.products.length==0){
           this.addProduct(data);
           this.updateSharedVariable(this.products);
-
+          this.calculatePay(this.products);
         }else{
           this.products.forEach(element => {
-
             if(data.getId() === element.id ){
               element.quantity++;
               this.state = true;
@@ -76,10 +76,12 @@ export class ShopCartComponent implements OnInit {
       image: data.getImage(),
       price: data.getPrice(),
       reduced: data.getReduced(),
-      quantity: 1
+      quantity: 1,
+      subtotal: data.getPrice() * 1
       };
       this.products.push(newProduct);
   }
+
 
   addCart(data: ItemCart){
       const newProduct: ItemCart = {
@@ -108,5 +110,13 @@ export class ShopCartComponent implements OnInit {
     this.shopCartService.listCart = products;
   }
 
+  addToOrder(){
+      this.shopCartService.listCart = this.products;
+  }
+
+  updateListOrder(list: ItemCart[]): void {
+    this.listOrder = list;
+
+  }
 
 }

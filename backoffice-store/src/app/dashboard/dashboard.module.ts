@@ -13,6 +13,7 @@ import { PantsComponent } from './shop/pants/pants.component';
 import { SportsComponent } from './shop/sports/sports.component';
 import { NavCategoriesComponent } from '../layouts/nav-categories/nav-categories.component';
 import { ShopCartComponent } from './shop-cart/shop-cart.component';
+import { OrderComponent } from './order/order.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ShopCartComponent } from './shop-cart/shop-cart.component';
     PantsComponent,
     SportsComponent,
     NavCategoriesComponent,
-    ShopCartComponent
+    ShopCartComponent,
+    OrderComponent
 
   ],
   imports: [

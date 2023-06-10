@@ -6,11 +6,19 @@ import { ItemCart } from '../interface/itemCart.interface';
   providedIn: 'root'
 })
 export class ShopCartService {
+  @Output() insertCart: EventEmitter<ItemShop> = new EventEmitter<ItemShop>();
 
-  @Output() insert: EventEmitter<ItemShop> = new EventEmitter<ItemShop>();
-  listCart?: ItemCart[];
+  @Output() insert: EventEmitter<ItemCart> = new EventEmitter<ItemCart>();
+  public listCart?: ItemCart[];
 
-  constructor() {
+  constructor() {    }
 
+  getList(): ItemCart[] {
+    return this.listCart!;
   }
+
+  updateList(newList : ItemCart[]): void {
+    this.listCart = newList;
+  }
+
 }
