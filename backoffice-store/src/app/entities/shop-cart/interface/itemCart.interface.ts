@@ -5,4 +5,5 @@ export interface ItemCart {
   reduced: number;
   image: string;
   quantity: number;
+  subtotal?: number;
 }

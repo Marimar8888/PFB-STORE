@@ -20,16 +20,9 @@ export class ShopCartComponent implements OnInit {
   pay: number = 0;
   state: boolean = false;
 
-  constructor( private shopCartService: ShopCartService, private orderService: OrderService){   }
+  constructor( private shopCartService: ShopCartService){   }
 
   ngOnInit() {
-    if(this.orderService.listOrder){
-      this.orderService.listOrder.forEach( data =>{
-        this.addCartFromOrder(data);
-        this.updateSharedVariableFromOrder(this.productsOrder);
-        this.calculatePay(this.products);
-      })
-    }
 
      if (this.shopCartService.listCart){
       this.shopCartService.listCart.forEach( data =>{
@@ -40,14 +33,12 @@ export class ShopCartComponent implements OnInit {
      }
      this.shopCartService.insert.subscribe( data => {
         this.state = false;
-
         if(this.products.length==0){
           this.addProduct(data);
           this.updateSharedVariable(this.products);
           this.calculatePay(this.products);
         }else{
           this.products.forEach(element => {
-
             if(data.getId() === element.id ){
               element.quantity++;
               this.state = true;
@@ -85,7 +76,8 @@ export class ShopCartComponent implements OnInit {
       image: data.getImage(),
       price: data.getPrice(),
       reduced: data.getReduced(),
-      quantity: 1
+      quantity: 1,
+      subtotal: data.getPrice() * 1
       };
       this.products.push(newProduct);
   }
@@ -124,9 +116,7 @@ export class ShopCartComponent implements OnInit {
   updateSharedVariable(products: ItemCart[]){
     this.shopCartService.listCart = products;
   }
-  updateSharedVariableFromOrder(products: ItemOrder[]){
-    this.orderService.listOrder = products;
-  }
+
   addToOrder(){
       this.shopCartService.listCart = this.products;
   }

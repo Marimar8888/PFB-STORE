@@ -12,52 +12,41 @@ import { Item } from 'src/app/entities/item/modelo/item.model';
 })
 export class OrderComponent implements OnInit {
 
- orderList: ItemOrder[] = [];
- listCart: ItemCart[] = [];
+ products: ItemCart[]=[];
  item?: ItemCart;
  subtotal?: number;
  total?: number = 0;
  pay?: number = 0;
-  constructor(private shopService: ShopCartService, private orderService : OrderService){
+  constructor(private shopService: ShopCartService){
 
   }
   ngOnInit(): void {
     if (this.shopService.listCart){
-      console.log(this.shopService.listCart);
        this.shopService.listCart.forEach(data => {
-       this.subtotal = 0;
-       this.subtotal = data.price * data.quantity;
-       const newProduct: ItemOrder =  new ItemOrder(data.id, data.name, data.price, data.reduced, data.image, data.quantity, this.subtotal);
-       this.total! += this.subtotal;
-       this.orderList.push(newProduct);
-       this.updateSharedVariable(this.orderList);
-
+       const newProduct: ItemCart =  new ItemCart(data.id, data.name, data.price, data.reduced, data.image, data.quantity, data.subtotal);
+       this.products.push(newProduct);
       } )
+      this.calculatePay(this.products);
+
     }
  }
     process(){
 
     }
 
-    removeFromOrder(item: ItemOrder){
-      const index = this.orderList.indexOf(item);
-      this.orderList.splice(index, 1);
-      this.calculatePay(this.orderList);
-      this.updateSharedVariable(this.orderList);
+    removeFromOrder(item: ItemCart){
+      const index = this.products.indexOf(item);
+      this.products.splice(index, 1);
+      this.calculatePay(this.products);
+      //this.updateSharedVariable(this.products);
 
     }
-    calculatePay(orderList: ItemOrder[]) : number  {
+    calculatePay(products: ItemCart[]) : number  {
       this.total =0;
-      orderList.forEach(item => {
-        this.subtotal=0;
-        this.subtotal = item.getQuantity() * item.getPrice();
-        this.total! += this.subtotal;
+      products.forEach(item => {
+        this.total! += item.getSubtotal();
       });
         return this.total;
-    }
-    updateSharedVariable(orderList: ItemOrder[]){
-      this.orderService.listOrder = this.orderList;
-
     }
 
 
