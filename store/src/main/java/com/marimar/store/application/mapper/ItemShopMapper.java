@@ -5,5 +5,5 @@ import com.marimar.store.domain.entity.Item;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring", uses = CategoryMapper.class)
-public interface ItemShopMapper extends EntityMapper<ItemShopDTO, Item> {
+public interface  ItemShopMapper extends EntityMapper<ItemShopDTO, Item> {
 }
