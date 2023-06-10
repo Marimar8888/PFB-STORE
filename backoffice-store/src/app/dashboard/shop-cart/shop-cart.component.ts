@@ -27,6 +27,7 @@ export class ShopCartComponent implements OnInit {
       this.orderService.listOrder.forEach( data =>{
         this.addCartFromOrder(data);
         this.updateSharedVariableFromOrder(this.productsOrder);
+        this.calculatePay(this.products);
       })
     }
 
@@ -34,6 +35,7 @@ export class ShopCartComponent implements OnInit {
       this.shopCartService.listCart.forEach( data =>{
         this.addCart(data);
         this.updateSharedVariable(this.products);
+        this.calculatePay(this.products);
       })
      }
      this.shopCartService.insert.subscribe( data => {
@@ -42,7 +44,7 @@ export class ShopCartComponent implements OnInit {
         if(this.products.length==0){
           this.addProduct(data);
           this.updateSharedVariable(this.products);
-
+          this.calculatePay(this.products);
         }else{
           this.products.forEach(element => {
 
