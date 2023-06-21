@@ -8,14 +8,15 @@ import javax.persistence.*;
 public class OrderLine {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "orderLineSecuence")
+    @SequenceGenerator(name = "orderLineSecuence")
     private Long id;
 
     @ManyToOne
     private Order order;
 
-    @ManyToOne
-    private Item item;
+ /*   @ManyToOne
+    private Item item;*/
 
     private double price;
     private int quantity;
