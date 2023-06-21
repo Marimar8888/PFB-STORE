@@ -8,7 +8,6 @@ import javax.validation.constraints.Size;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categorySequence")
-    @SequenceGenerator(name = "categorySequence")
     private Long id;
 
     @Column(length = 100, nullable = false)

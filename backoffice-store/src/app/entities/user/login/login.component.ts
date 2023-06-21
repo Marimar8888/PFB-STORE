@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit{
                private cookieService: CookieService) { }
 
   ngOnInit() {
-    this.cookieService.deleteAll();
     this.buildForm();
   }
 

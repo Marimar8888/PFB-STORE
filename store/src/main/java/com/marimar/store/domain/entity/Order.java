@@ -8,12 +8,11 @@ import java.util.List;
 @Table(name ="orders")
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "orderSequence")
-    @SequenceGenerator(name = "orderSequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
- /*   @ManyToOne
-    private User user;*/
+    @ManyToOne
+    private User user;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderLine> orderLines;
@@ -29,13 +28,13 @@ public class Order {
         this.id = id;
     }
 
-  /* public User getUser() {
+    public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }*/
+    }
 
     public List<OrderLine> getOrderLines() {
         return orderLines;

@@ -4,7 +4,8 @@ import com.marimar.store.domain.entity.Item;
 import com.marimar.store.domain.entity.Order;
 
 import java.io.Serializable;
-
+import javax.persistence.*;
+import java.util.List;
 public class OrderLineDTO implements Serializable {
 
     private Long id;

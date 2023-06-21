@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthenticationService } from 'src/app/config/authentication.service';
@@ -8,17 +8,14 @@ import { AuthenticationService } from 'src/app/config/authentication.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
-  session: boolean | undefined;
+  session: boolean;
   userName?: string;
 
   constructor(private authService: AuthenticationService, private cookieService: CookieService, private router: Router){
 
-
-  }
-  ngOnInit(): void {
-    const token = this.cookieService.get('token');
+    const token = cookieService.get('token');
     if(token){
       this.session = true;
       this.userName = this.cookieService.get('token');
@@ -27,8 +24,10 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+
+
   logOut(){
-     this.cookieService.deleteAll();
+     this.cookieService.delete('token');
      localStorage.removeItem('token');
      this.session = false;
      this.router.navigate(['/login']);
