@@ -1,21 +1,20 @@
 package com.marimar.store.domain.entity;
-import com.marimar.store.application.dto.OrderLineDTO;
-
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name ="orders")
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "orderSequence")
+    @SequenceGenerator(name = "orderSequence")
     private Long id;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private Set<OrderLine> orderLines;
 
     @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
-
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<OrderLine> orderLines;
 
     public Order() {
     }
@@ -36,11 +35,15 @@ public class Order {
         this.user = user;
     }
 
-    public List<OrderLine> getOrderLines() {
+    public Set<OrderLine> getOrderLines() {
         return orderLines;
     }
 
-    public void setOrderLines(List<OrderLine> orderLines) {
+    public void setOrderLines(Set<OrderLine> orderLines) {
         this.orderLines = orderLines;
+        this.orderLines.forEach(orderLine -> orderLine.setOrder(this));
     }
+
+
+
 }

@@ -1,6 +1,5 @@
 package com.marimar.store.infraestructure.rest;
 
-import com.marimar.store.application.dto.ItemDTO;
 import com.marimar.store.application.dto.LoginDTO;
 import com.marimar.store.application.dto.UserDTO;
 import com.marimar.store.application.service.UserService;
@@ -18,7 +17,6 @@ public class UserRestController {
     public UserRestController(UserService userService) {
         this.userService = userService;
     }
-
 
     @CrossOrigin
     @GetMapping(value="/users/{userName}/favorites")
@@ -74,7 +72,6 @@ public class UserRestController {
            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
        }
     }
-
     @CrossOrigin
     @DeleteMapping(value="/users/{userName}/favorites/remove/{itemId}")
     public ResponseEntity<Void> deleteFavoriteByUserNameAndByItemId(@PathVariable String userName, @PathVariable Long itemId){
