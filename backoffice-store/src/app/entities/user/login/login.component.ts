@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit{
   userForm!: FormGroup;
   user?: User;
   userLogin?: any;
+  userId?: number;
 
   constructor( private userService: UserService,
                private fb: FormBuilder,
@@ -42,12 +43,13 @@ export class LoginComponent implements OnInit{
   private loginUser(userToSave: ILoginUser) {
     this.userService.logintUser(userToSave).subscribe({
       next: (response) =>{
-        this.userLogin =  this.userForm.get(['userName'])!.value;
-        const myDate: Date = new Date();
+        this.userLogin = response.userName;
+        this.userId = response.id;
+        console.log(this.userId);
         this.cookieService.set('token', this.userLogin, 2 );
+        this.cookieService.set('tokenId', this.userId.toString());
         this.router.navigate([''])
         alert("Usuario logueado correctamente");
-
       },
       error: (err) => {this.handleError(err);}
     })
