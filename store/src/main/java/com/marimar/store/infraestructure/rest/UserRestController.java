@@ -1,5 +1,6 @@
 package com.marimar.store.infraestructure.rest;
 
+import com.marimar.store.application.dto.ClientDTO;
 import com.marimar.store.application.dto.LoginDTO;
 import com.marimar.store.application.dto.UserDTO;
 import com.marimar.store.application.service.UserService;
@@ -47,7 +48,7 @@ public class UserRestController {
 
     @CrossOrigin
     @PostMapping(value = "/users/login", produces = "application/json", consumes = "application/json")
-    ResponseEntity<LoginDTO> logintUser(@RequestBody LoginDTO loginDTO) {
+    ResponseEntity<ClientDTO> logintUser(@RequestBody LoginDTO loginDTO) {
 
         boolean UserNameExist = this.userService.UserNameExist(loginDTO.getUserName());
         if (UserNameExist) {
@@ -57,8 +58,8 @@ public class UserRestController {
             } else {
                 String userName = loginDTO.getUserName();
                 UserDTO userDTO = this.userService.getUserByUserName(userName);
-                loginExist.setId(userDTO.getId());
-                return new ResponseEntity<>(loginExist, HttpStatus.OK);
+                ClientDTO clientDTO = new ClientDTO(userDTO.getId(), userDTO.getUserName());
+                return new ResponseEntity<>(clientDTO, HttpStatus.OK);
             }
         } else {
             return new  ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -35,11 +35,4 @@ public class LoginDTO implements Serializable {
         this.password = password;
     }
 
-  /*  public String getRol() {
-        return rol;
-    }
-
-    //public void setRol(String rol) {
-        this.rol = rol;
-    }*/
 }
