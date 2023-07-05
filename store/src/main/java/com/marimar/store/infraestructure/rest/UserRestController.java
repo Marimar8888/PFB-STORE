@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserRestController {
@@ -49,18 +50,22 @@ public class UserRestController {
     ResponseEntity<LoginDTO> logintUser(@RequestBody LoginDTO loginDTO) {
 
         boolean UserNameExist = this.userService.UserNameExist(loginDTO.getUserName());
-
         if (UserNameExist) {
             LoginDTO loginExist = this.userService.loginAuthentication(loginDTO);
             if (loginExist == null) {
                 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             } else {
-                return new ResponseEntity<>(HttpStatus.OK);
+                String userName = loginDTO.getUserName();
+                UserDTO userDTO = this.userService.getUserByUserName(userName);
+                loginExist.setId(userDTO.getId());
+                return new ResponseEntity<>(loginExist, HttpStatus.OK);
             }
         } else {
             return new  ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+
     @CrossOrigin
     @PutMapping(value= "/users/{userName}/favorites/{itemId}")
     public ResponseEntity<List<Long>> insertItemsInUsers(@PathVariable Long itemId, @PathVariable String userName){
