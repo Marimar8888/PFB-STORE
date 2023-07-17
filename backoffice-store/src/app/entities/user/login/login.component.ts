@@ -5,6 +5,7 @@ import { ILoginUser } from '../interface/loginUser.interface';
 import { User } from '../model/user.model';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { AuthenticationService } from 'src/app/config/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit{
   userId?: number;
 
   constructor( private userService: UserService,
+               private authentication: AuthenticationService,
                private fb: FormBuilder,
                private router: Router,
                private cookieService: CookieService) { }
@@ -49,6 +51,7 @@ export class LoginComponent implements OnInit{
         this.cookieService.set('token', this.userLogin, 2 );
         this.cookieService.set('tokenId', this.userId.toString());
         this.router.navigate([''])
+        this.authentication.setUsername(this.userLogin);
         alert("Usuario logueado correctamente");
       },
       error: (err) => {this.handleError(err);}

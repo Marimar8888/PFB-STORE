@@ -9,26 +9,33 @@ import { AuthenticationService } from 'src/app/config/authentication.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  username: string | null | undefined;
+  session: boolean = false;
 
-  session: boolean;
-  userName?: string;
 
   constructor(private authService: AuthenticationService, private cookieService: CookieService, private router: Router){
 
-    const token = cookieService.get('token');
+  }
+  ngOnInit() {
+    this.authService.username$.subscribe(userName => {
+      this.username = userName;
+      const token = this.cookieService.get('token');
+
     if(token){
       this.session = true;
-      this.userName = this.cookieService.get('token');
+    
     }else{
       this.session=false;
     }
+
+    });
+
   }
-
-
-
   logOut(){
      this.cookieService.delete('token');
      localStorage.removeItem('token');
+     this.cookieService.delete('tokenId');
+     localStorage.removeItem('tokenId');
      this.session = false;
      this.router.navigate(['/login']);
   }
