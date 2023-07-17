@@ -1,13 +1,14 @@
 <header class="header" >
-  <div class="header" >
-    <div class="header" *ngIf="!session" >
+
+    <div *ngIf="!session" >
       <a  [routerLink]="['/login']"><span id="btn_login"> Identifícate</span></a>
-      </div>
-      <div class="header" *ngIf="'session'" >
-        <a ><span id="btn_login_name"> {{username}}</span></a>
+    </div>
+    <div  *ngIf="'session'" >
+        <span id="btn_login_name"> {{username}}</span>
         <a  (click)="logOut()"><span id="btn_login_out" > Cerrar Session</span></a>
       </div>
-  </div>
+ 
 </header>
+
 
 
