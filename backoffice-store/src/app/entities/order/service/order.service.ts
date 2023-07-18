@@ -1,6 +1,7 @@
-import { EventEmitter, Injectable, Output } from '@angular/core';
-import { ItemCart } from '../../shop-cart/modelo/itemCart.model';
-import { ItemOrder } from '../model/order.model';
+import { Injectable } from '@angular/core';
+
+import { IItemCart } from '../../shop-cart/interface/itemCart.interface';
+
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -8,12 +9,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class OrderService {
-  @Output() update: EventEmitter<ItemCart[]> = new EventEmitter<ItemCart[]>();
-  listOrder?: ItemOrder[];
+
   constructor(private httpClient: HttpClient) { }
 
-  public insertOrder(products: ItemCart[]): Observable<ItemCart[]> {
+  public insertOrder(products: IItemCart[]): Observable<IItemCart[]> {
     let urlEndpoint: string = "http://localhost:8080/store/orders/";
-    return this.httpClient.post<ItemCart[]>(urlEndpoint, products);
+    return this.httpClient.post<IItemCart[]>(urlEndpoint, products);
   }
 }

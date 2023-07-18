@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit{
         console.log(this.userId);
         this.cookieService.set('token', this.userLogin, 2 );
         this.cookieService.set('tokenId', this.userId.toString());
-        this.router.navigate([''])
+        this.router.navigate(['']);
         this.authentication.setUsername(this.userLogin);
         alert("Usuario logueado correctamente");
       },

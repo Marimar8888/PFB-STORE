@@ -13,12 +13,12 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of products">
-        <td>{{ item.getId() }}</td>
-        <td>{{ item.getName() }}</td>
-        <td >{{ item.getPrice() }}</td>
-        <td>{{ item.getQuantity() }}</td>
-        <td>{{item.getSubtotal()}}</td>
-        <td><img width="50px" height="50px"  [src]="'data:image/webp;base64,' + item.getImage() " alt="Product Image"></td>
+        <td>{{ item.id }}</td>
+        <td>{{ item.name }}</td>
+        <td >{{ item.price }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{item.subtotal}}</td>
+        <td><img width="50px" height="50px"  [src]="'data:image/webp;base64,' + item.image " alt="Product Image"></td>
         <td>
           <button (click)="removeFromOrder(item)" class="btn btn-sm btn-danger">Eliminar</button>
         </td>

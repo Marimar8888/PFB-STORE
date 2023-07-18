@@ -7,6 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { UserService } from '../../user/service/user.service';
 import { Router } from '@angular/router';
 import { ShopCartService } from '../../shop-cart/service/shopCart.service';
+import { IItemCart } from '../../shop-cart/interface/itemCart.interface';
 registerLocaleData(localeEs, 'es');
 
 
@@ -74,10 +75,18 @@ export class ItemCardComponent implements OnInit {
      })
 
    }
-
    addToCart(){
-      this.shopCartService.insertCart.emit(this.article);
-   }
+    const newProduct: IItemCart = {
+    id: this.article!.getId(),
+    name: this.article!.getName(),
+    image: this.article!.getImage(),
+    price: this.article!.getPrice(),
+    reduced: this.article!.getReduced(),
+    quantity: 1,
+    subtotal: this.article!.getPrice() * 1
+    };
+    this.shopCartService.insert.emit(newProduct);
+}
 
   private gestionarError(err: any) {
     console.log(err);

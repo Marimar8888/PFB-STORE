@@ -1,5 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ItemCart  } from '../../entities/shop-cart/modelo/itemCart.model';
+import { Component, OnInit } from '@angular/core';
+import { IItemCart } from 'src/app/entities/shop-cart/interface/itemCart.interface';
 import { ShopCartService } from 'src/app/entities/shop-cart/service/shopCart.service';
 import { OrderService } from 'src/app/entities/order/service/order.service';
 import { Router } from '@angular/router';
@@ -12,9 +12,8 @@ import { Router } from '@angular/router';
 
 export class OrderComponent implements OnInit {
 
- @Output() listOrder: EventEmitter<ItemCart[]> = new EventEmitter<ItemCart[]>();
-  products: ItemCart[]=[];
- item?: ItemCart;
+
+ products: IItemCart[]=[];
  subtotal?: number;
  total?: number = 0;
  pay?: number = 0;
@@ -26,14 +25,23 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
     if (this.shopService.listCart){
        this.shopService.listCart.forEach(data => {
-       const newProduct: ItemCart =  new ItemCart(data.id, data.name, data.price, data.reduced, data.image, data.quantity, data.subtotal);
-       this.products.push(newProduct);
+       const newProduct: IItemCart = {
+        id: data.id,
+        name: data.name,
+        image: data.image,
+        price: data.price,
+        reduced: data.reduced,
+        quantity: data.quantity,
+        subtotal: data.price * data.quantity
+       };
+      this.products.push(newProduct);
+      
       } )
-      this.updateSharedVariable(this.products)
+  
       this.calculatePay(this.products);
     }
   }
-    process(products: ItemCart[]){
+    process(products: IItemCart[]){
       this.orderService.insertOrder(products).subscribe({
         next: (orderInserted) => {
           alert("insertado correctamente");
@@ -42,25 +50,23 @@ export class OrderComponent implements OnInit {
         error: (err) => {this.handleError(err);}
       });
     }
-    removeFromOrder(item: ItemCart){
+    removeFromOrder(item: IItemCart){
       const index = this.products.indexOf(item);
       this.products.splice(index, 1);
       this.calculatePay(this.products);
-      this.updateServiceVariable(this.products);
+      this.updateSharedVariable(this.products);
 
     }
-    updateServiceVariable(products: ItemCart[]) {
-      this.listOrder.emit(products);
-     }
-    calculatePay(products: ItemCart[]) : number  {
+
+    calculatePay(products: IItemCart[]) : number  {
       this.total =0;
       products.forEach(item => {
-        this.total! += item.getSubtotal();
+        this.total! += item.subtotal!;
       });
         return this.total;
     }
-    updateSharedVariable(products: ItemCart[]){
-     // this.shopService.listCart = products;
+    updateSharedVariable(products: IItemCart[]){
+      this.shopService.listCart = products;
     }
     private handleError(err: any): void{
       //Lo que queramos que vea el usuario un alert....
