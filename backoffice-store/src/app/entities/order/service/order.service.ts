@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { IItemCart } from '../../shop-cart/interface/itemCart.interface';
+import { IOrder } from '../interface/order.interface';
 
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -12,8 +12,8 @@ export class OrderService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public insertOrder(products: IItemCart[]): Observable<IItemCart[]> {
+  public insertOrder(order: IOrder): Observable<IOrder> {
     let urlEndpoint: string = "http://localhost:8080/store/orders/";
-    return this.httpClient.post<IItemCart[]>(urlEndpoint, products);
+    return this.httpClient.post<IOrder>(urlEndpoint, order);
   }
 }

@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ItemShop } from 'src/app/entities/item/modelo/itemShop.model';
-import { ItemOrder } from 'src/app/entities/order/model/order.model';
+import { Component,  Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { IItemCart } from 'src/app/entities/shop-cart/interface/itemCart.interface';
 import { ShopCartService } from 'src/app/entities/shop-cart/service/shopCart.service';
 
@@ -14,12 +14,12 @@ export class ShopCartComponent implements OnInit {
   @Input() listOrder: IItemCart[]=[];
   carritoVisible = false;
   products: IItemCart[]=[];
-  productsOrder: ItemOrder[]=[];
   total: number =0;
   pay: number = 0;
   state: boolean = false;
 
-  constructor( private shopCartService: ShopCartService){   }
+
+  constructor( private shopCartService: ShopCartService, private router: Router, private cookieService: CookieService ){   }
 
   ngOnInit() {
       if (this.shopCartService.listCart){
@@ -111,11 +111,16 @@ export class ShopCartComponent implements OnInit {
   }
 
   addToOrder(){
-    if(this.shopCartService.listCart){
-      this.shopCartService.listCart = this.products;
+    if(this.cookieService.get('tokenId')){
+      if(this.shopCartService.listCart){
+        this.shopCartService.listCart = this.products;
+        this.router.navigate(['/order']);
+      }
     }else{
-      this.shopCartService.listCart = this.products;
+      alert("Para realizar perdidos debe loguearse");
+      this.router.navigate(['login']);
     }
+
   }
 
   updateListOrder(list: IItemCart[]): void {

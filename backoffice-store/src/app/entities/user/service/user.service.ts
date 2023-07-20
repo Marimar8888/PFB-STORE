@@ -13,7 +13,7 @@ import { IClientUser } from '../interface/clientUser.interface';
 export class UserService {
 
 
-  private url: string = 'http://localhost:8080/store/users';
+  private url: string = "http://localhost:8080/store/users";
   private urlLogin: string = 'http://localhost:8080/store/users/login';
 
 
