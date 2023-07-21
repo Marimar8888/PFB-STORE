@@ -2,10 +2,9 @@
 
 .header {
 	background-color: $background-color_3;
+  margin-bottom: 2px;
 	height: 50px;
 }
-
-
 
 a{
   color: white;
@@ -14,7 +13,11 @@ a{
 
 }
 div{
-  display: inline;
+  text-align: right;
+ 
+}
+.header div{
+  display: block;
 }
 
 

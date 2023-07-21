@@ -4,11 +4,19 @@ import java.io.Serializable;
 
 public class LoginDTO implements Serializable {
 
+    private Long id;
     private String userName;
     private String password;
     // private String rol;
 
     public LoginDTO() {
+    }
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUserName() {
@@ -27,11 +35,4 @@ public class LoginDTO implements Serializable {
         this.password = password;
     }
 
-  /*  public String getRol() {
-        return rol;
-    }
-
-    //public void setRol(String rol) {
-        this.rol = rol;
-    }*/
 }

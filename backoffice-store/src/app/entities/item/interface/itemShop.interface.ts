@@ -5,5 +5,4 @@ export interface IItemShop{
   reduced: number;
   image: string;
   favorite?: boolean;
-
 }

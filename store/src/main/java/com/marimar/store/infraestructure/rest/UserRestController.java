@@ -1,6 +1,6 @@
 package com.marimar.store.infraestructure.rest;
 
-import com.marimar.store.application.dto.ItemDTO;
+import com.marimar.store.application.dto.ClientDTO;
 import com.marimar.store.application.dto.LoginDTO;
 import com.marimar.store.application.dto.UserDTO;
 import com.marimar.store.application.service.UserService;
@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserRestController {
@@ -18,7 +19,6 @@ public class UserRestController {
     public UserRestController(UserService userService) {
         this.userService = userService;
     }
-
 
     @CrossOrigin
     @GetMapping(value="/users/{userName}/favorites")
@@ -48,21 +48,25 @@ public class UserRestController {
 
     @CrossOrigin
     @PostMapping(value = "/users/login", produces = "application/json", consumes = "application/json")
-    ResponseEntity<LoginDTO> logintUser(@RequestBody LoginDTO loginDTO) {
+    ResponseEntity<ClientDTO> logintUser(@RequestBody LoginDTO loginDTO) {
 
         boolean UserNameExist = this.userService.UserNameExist(loginDTO.getUserName());
-
         if (UserNameExist) {
             LoginDTO loginExist = this.userService.loginAuthentication(loginDTO);
             if (loginExist == null) {
                 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             } else {
-                return new ResponseEntity<>(HttpStatus.OK);
+                String userName = loginDTO.getUserName();
+                UserDTO userDTO = this.userService.getUserByUserName(userName);
+                ClientDTO clientDTO = new ClientDTO(userDTO.getId(), userDTO.getUserName());
+                return new ResponseEntity<>(clientDTO, HttpStatus.OK);
             }
         } else {
             return new  ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+
     @CrossOrigin
     @PutMapping(value= "/users/{userName}/favorites/{itemId}")
     public ResponseEntity<List<Long>> insertItemsInUsers(@PathVariable Long itemId, @PathVariable String userName){
@@ -74,7 +78,6 @@ public class UserRestController {
            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
        }
     }
-
     @CrossOrigin
     @DeleteMapping(value="/users/{userName}/favorites/remove/{itemId}")
     public ResponseEntity<Void> deleteFavoriteByUserNameAndByItemId(@PathVariable String userName, @PathVariable Long itemId){
