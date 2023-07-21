@@ -1,9 +1,7 @@
-export interface IItemOrder {
-  id: number;
-  name: string;
-  price: number;
-  reduced: number;
-  image: string;
-  quantity: number;
-  subTotal: number;
+import { IOrderLine } from "./orderLine.interface";
+
+export interface IOrder {
+  id?: number;
+  userId: number;
+  orderLines: IOrderLine[];
 }

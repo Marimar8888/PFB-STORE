@@ -13,4 +13,5 @@ public interface UserPersistance {
     User saveUser(User user);
     void deleteUser(long idUser);
     List<User> getUserByUserName(String userName);
+    User getOneUserByUserName(String userName);
 }

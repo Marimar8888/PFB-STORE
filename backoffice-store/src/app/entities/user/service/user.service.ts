@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient  } from '@angular/common/http';
-import { Observable  } from 'rxjs';
+import { Observable, tap  } from 'rxjs';
 import { IUser } from '../interface/user.interface';
 import { ILoginUser } from '../interface/loginUser.interface';
 import { ListKeyManager } from '@angular/cdk/a11y';
 import { IFavorites } from '../interface/favorites.interface';
+import { IClientUser } from '../interface/clientUser.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import { IFavorites } from '../interface/favorites.interface';
 export class UserService {
 
 
-  private url: string = 'http://localhost:8080/store/users';
+  private url: string = "http://localhost:8080/store/users";
   private urlLogin: string = 'http://localhost:8080/store/users/login';
 
 
@@ -20,7 +21,12 @@ export class UserService {
   constructor(private httpCliente: HttpClient ) { }
 
   public insertUser(user: IUser): Observable<IUser>{ return this.httpCliente.post<IUser>(this.url, user); }
-  public logintUser(creds: ILoginUser){ return this.httpCliente.post<IUser>(this.urlLogin, creds); }
+ // public logintUser(creds: ILoginUser){ return this.httpCliente.post<IUser>(this.urlLogin, creds); }
+ public logintUser(creds: ILoginUser): Observable<IClientUser>{ return this.httpCliente.post<IClientUser>(this.urlLogin, creds).pipe(
+  tap((response: IClientUser) =>{
+    console.log(response);
+  })
+ ); }
   public insertFavoriteByUserNameAndItemId(userName: string, itemId: number) {
     let urlFavorite: string = "http://localhost:8080/store/users/" + userName + "/favorites/" + itemId;
     return this.httpCliente.put(urlFavorite, null); }

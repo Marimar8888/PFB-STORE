@@ -139,6 +139,18 @@ public class UserServiceImpl implements UserService {
             return false;
         }
     }
+    @Override
+    @Transactional(readOnly = true)
+    public UserDTO getUserByUserName(String userName) {
+        List <UserDTO> userDtoList = this.mapper.toDto(userPersistance.getUserByUserName(userName));
+        if (userDtoList.isEmpty()) {
+            return null;
+        }else{
+            UserDTO userDto = userDtoList.get(0);
+            return userDto;
+        }
+
+    }
 
 }
 

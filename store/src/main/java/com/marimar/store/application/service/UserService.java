@@ -25,4 +25,6 @@ public interface UserService {
     boolean insertFavoriteByUserIdAndByItemid(String userName, Long itemId);
 
     boolean deleteFavoriteByItemId(String userName, Long itemId);
+
+    UserDTO getUserByUserName(String userName);
 }

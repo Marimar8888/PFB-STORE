@@ -1,4 +1,4 @@
-export interface ItemCart {
+export interface IItemCart {
   id: number;
   name: string;
   price: number;

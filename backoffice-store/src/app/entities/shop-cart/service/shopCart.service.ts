@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { ItemShop } from '../../item/modelo/itemShop.model';
-import { ItemCart } from '../interface/itemCart.interface';
+import { IItemCart } from '../interface/itemCart.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -8,16 +8,16 @@ import { ItemCart } from '../interface/itemCart.interface';
 export class ShopCartService {
   @Output() insertCart: EventEmitter<ItemShop> = new EventEmitter<ItemShop>();
 
-  @Output() insert: EventEmitter<ItemCart> = new EventEmitter<ItemCart>();
-  public listCart?: ItemCart[];
+  @Output() insert: EventEmitter<IItemCart> = new EventEmitter<IItemCart>();
+  public listCart?: IItemCart[];
 
   constructor() {    }
 
-  getList(): ItemCart[] {
+  getList(): IItemCart[] {
     return this.listCart!;
   }
 
-  updateList(newList : ItemCart[]): void {
+  updateList(newList : IItemCart[]): void {
     this.listCart = newList;
   }
 
