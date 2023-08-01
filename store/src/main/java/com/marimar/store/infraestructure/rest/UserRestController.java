@@ -4,20 +4,25 @@ import com.marimar.store.application.dto.ClientDTO;
 import com.marimar.store.application.dto.LoginDTO;
 import com.marimar.store.application.dto.UserDTO;
 import com.marimar.store.application.service.UserService;
+import com.marimar.store.domain.entity.User;
+import com.marimar.store.utils.JwtConfig;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
+@CrossOrigin
 public class UserRestController {
 
-    private final UserService userService;
+   private final UserService userService;
+   private final JwtConfig jwtConfig;
 
-    public UserRestController(UserService userService) {
+    public UserRestController(UserService userService, JwtConfig jwtConfig) {
         this.userService = userService;
+        this.jwtConfig = jwtConfig;
     }
 
     @CrossOrigin
@@ -29,7 +34,19 @@ public class UserRestController {
 
     @CrossOrigin
     @GetMapping(value = "/users", produces = "application/json")
-    ResponseEntity<List<UserDTO>> getAllUsers(){
+    public ResponseEntity<List<UserDTO>> getAllUsers(HttpServletRequest request) {
+        // Obtén el nombre de usuario del atributo de la solicitud
+        String username = (String) request.getAttribute("username");
+
+        // Verificar que el usuario tenga permiso para acceder a esta información
+        if (username == null) {
+            // El token no es válido o ha expirado, denegar acceso
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
+        // Aquí puedes agregar más lógica de validación según tus necesidades
+
+        // Si llega hasta aquí, el token es válido y está vigente, puedes continuar con el código original
         List<UserDTO> users = this.userService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
@@ -46,7 +63,7 @@ public class UserRestController {
         }
     }
 
-    @CrossOrigin
+  /*  @CrossOrigin
     @PostMapping(value = "/users/login", produces = "application/json", consumes = "application/json")
     ResponseEntity<ClientDTO> logintUser(@RequestBody LoginDTO loginDTO) {
 
@@ -64,8 +81,25 @@ public class UserRestController {
         } else {
             return new  ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
+    }*/
+    @CrossOrigin
+    @PostMapping(value = "/users/login", produces = "application/json", consumes = "application/json")
+    ResponseEntity<ClientDTO> logintUser(@RequestBody LoginDTO loginDTO) {
+        boolean userNameExists = this.userService.UserNameExist(loginDTO.getUserName());
+        if (!userNameExists) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 
+        LoginDTO loginExist = this.userService.loginAuthentication(loginDTO);
+        if (loginExist == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+        UserDTO user = this.userService.getUserByUserName(loginDTO.getUserName());
+        // Autenticación exitosa, genera el token JWT y devuélvelo en la respuesta
+        String token = jwtConfig.generateToken(loginDTO.getUserName());
+        ClientDTO clientDTO = new ClientDTO(user.getId(), user.getUserName(), token);
+        return ResponseEntity.ok(clientDTO);
+    }
 
     @CrossOrigin
     @PutMapping(value= "/users/{userName}/favorites/{itemId}")
