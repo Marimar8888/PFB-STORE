@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +24,13 @@ public class ItemRestController {
 
     @CrossOrigin
     @GetMapping(value = "/items-old", produces = "application/json")
-    ResponseEntity<List<ItemDTO>> getAllItems(){
+    ResponseEntity<List<ItemDTO>> getAllItems(HttpServletRequest request){
+        String username = (String) request.getAttribute("username");
+
+        if (username == null) {
+            // El token no es válido o ha expirado, deniega el acceso
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
         List<ItemDTO> items = this.itemService.getAllItems();
         return new ResponseEntity<>(items, HttpStatus.OK);
     }
@@ -37,6 +44,7 @@ public class ItemRestController {
     @CrossOrigin
     @GetMapping(value = "/items", produces = "application/json")
     ResponseEntity<Page<ItemDTO>> getItemsByCriteriaPaged(@RequestParam(value="filter", required = false) String filter, Pageable pageable){
+
         Page<ItemDTO> items = this.itemService.getItemByCriteriaStringPaged(pageable, filter);
         return new ResponseEntity<Page<ItemDTO>>(items, HttpStatus.OK);
     }

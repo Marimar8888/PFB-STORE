@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient  } from '@angular/common/http';
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Observable, tap  } from 'rxjs';
 import { IUser } from '../interface/user.interface';
 import { ILoginUser } from '../interface/loginUser.interface';
@@ -18,24 +18,25 @@ export class UserService {
 
 
 
-  constructor(private httpCliente: HttpClient ) { }
+  constructor(private httpClient: HttpClient ) { }
 
-  public insertUser(user: IUser): Observable<IUser>{ return this.httpCliente.post<IUser>(this.url, user); }
+  public insertUser(user: IUser): Observable<IUser>{ return this.httpClient.post<IUser>(this.url, user); }
  // public logintUser(creds: ILoginUser){ return this.httpCliente.post<IUser>(this.urlLogin, creds); }
- public logintUser(creds: ILoginUser): Observable<IClientUser>{ return this.httpCliente.post<IClientUser>(this.urlLogin, creds).pipe(
+  public logintUser(creds: ILoginUser): Observable<IClientUser>{ return this.httpClient.post<IClientUser>(this.urlLogin, creds).pipe(
   tap((response: IClientUser) =>{
     console.log(response);
   })
  ); }
   public insertFavoriteByUserNameAndItemId(userName: string, itemId: number) {
     let urlFavorite: string = "http://localhost:8080/store/users/" + userName + "/favorites/" + itemId;
-    return this.httpCliente.put(urlFavorite, null); }
+    return this.httpClient.put(urlFavorite, null); }
   public removeFavoriteByUserNameAndItemId(userName: string, itemId: number) {
     let urlFavorite: string = "http://localhost:8080/store/users/" + userName + "/favorites/remove/" + itemId;
-    return this.httpCliente.delete(urlFavorite);
+    return this.httpClient.delete(urlFavorite);
   }
   public getAllFavoritesByUserName(username: string): Observable<number[]> {
     let urlFavorite: string = "http://localhost:8080/store/users/" + username + "/favorites";
-    return this.httpCliente.get<number[]>(urlFavorite);  }
+    return this.httpClient.get<number[]>(urlFavorite);  }
+
 
 }

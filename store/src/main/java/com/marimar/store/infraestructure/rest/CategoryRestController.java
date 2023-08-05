@@ -6,9 +6,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class CategoryRestController {
 
     private final CategoryService categoryService;
@@ -19,13 +21,19 @@ public class CategoryRestController {
     //Método para consultar todas las cateogrías
     @CrossOrigin
     @GetMapping(value = "/categories", produces = "application/json")
-    ResponseEntity<List<CategoryDTO>> getAllCategories(@RequestParam(value = "partialName", required = false) String partialName){
-        List<CategoryDTO> categories;
-        if(partialName == null){
-            categories = this.categoryService.getAllCategories();
-        }else{
-            categories = this.categoryService.getAllCategoriesByName(partialName);
+    ResponseEntity<List<CategoryDTO>> getAllCategories(HttpServletRequest request){
+        String username = (String) request.getAttribute("username");
+
+        if (username == null) {
+            // El token no es válido o ha expirado, deniega el acceso
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
+        List<CategoryDTO> categories;
+       // if(partialName == null){
+            categories = this.categoryService.getAllCategories();
+      //  }else{
+        //    categories = this.categoryService.getAllCategoriesByName(partialName);
+        //}
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
     //Método para insertar una categoría

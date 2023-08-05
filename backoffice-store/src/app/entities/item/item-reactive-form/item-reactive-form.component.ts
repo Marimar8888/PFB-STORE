@@ -5,6 +5,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ItemService } from '../service/item.service';
 import { CategoryService } from '../../category/service/category.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthenticationService } from 'src/app/config/authentication.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-item-reactive-form',
@@ -18,14 +21,17 @@ export class ItemReactiveFormComponent implements OnInit {
     item?: Item;
     selectedCategory?: Category;
     categories: Category[] = [];
-
+    token?: String;
+    headers!: HttpHeaders;
     itemForm?: FormGroup;
 
     constructor(private route: ActivatedRoute,
                 private itemService: ItemService,
                 private categoryService: CategoryService,
                 private fb: FormBuilder,
-                private router: Router
+                private router: Router,
+                private cookieService: CookieService,
+                private auth: AuthenticationService
                 ) { }
 
     ngOnInit(): void {
@@ -45,14 +51,23 @@ export class ItemReactiveFormComponent implements OnInit {
     }
 
     public getAllCategories(event?: any): void {
-      let categorySearch: string | undefined;
-      if (event?.query) {
-        categorySearch = event.query;
+      this.token = this.cookieService.get('token');
+      if(this.token){
+        this.headers = this.auth.getVerifiUserToken();
+        let categorySearch: string | undefined;
+        if (event?.query) {
+          categorySearch = event.query;
+        }
+        this.categoryService.getAllCategoriesPartial(this.headers, categorySearch).subscribe({
+          next: (categoriesFiltered) => { this.categories = categoriesFiltered; },
+          error: (err) => {this.handleError(err);}
+        })
+       
+      }else{
+        alert("Debe loguearse para poder ver esta sección");
+        this.router.navigate(['/login']);
       }
-      this.categoryService.getAllCategories(categorySearch).subscribe({
-        next: (categoriesFiltered) => { this.categories = categoriesFiltered; },
-        error: (err) => {this.handleError(err);}
-      })
+     
     }
 
     public saveItem(): void {

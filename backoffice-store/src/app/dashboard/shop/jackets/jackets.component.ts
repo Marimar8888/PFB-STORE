@@ -27,7 +27,7 @@ export class JacketsComponent implements OnInit {
       this.getAllJackets();
 
     }else{
-      this.username = this.cookieService.get('token');
+      this.username = this.cookieService.get('user');
       this.getAllItemsWithFavorites(this.username);
     }
   }

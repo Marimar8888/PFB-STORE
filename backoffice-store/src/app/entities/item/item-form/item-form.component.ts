@@ -4,6 +4,8 @@ import { ItemService } from '../service/item.service';
 import { Item } from '../modelo/item.model';
 import { Category } from '../../category/model/category.model';
 import { CategoryService } from '../../category/service/category.service';
+import { HttpHeaders } from '@angular/common/http';
+import { AuthenticationService } from 'src/app/config/authentication.service';
 
 @Component({
   selector: 'app-item-form',
@@ -16,11 +18,12 @@ export class ItemFormComponent implements OnInit {
   item?: Item;
   selectedCategory?: Category;
   categories: Category[] = [];
-
+  headers!: HttpHeaders;
   constructor(private route: ActivatedRoute,
               private router: Router,
               private itemService: ItemService,
-              private categoryService: CategoryService
+              private categoryService: CategoryService,
+              private auth: AuthenticationService
               ){}
   ngOnInit(): void {
 
@@ -86,7 +89,8 @@ export class ItemFormComponent implements OnInit {
     if(event?.query){
       categorySearch = event.query;
     }
-    this.categoryService.getAllCategories(categorySearch).subscribe({
+    this.headers = this.auth.getVerifiUserToken();
+    this.categoryService.getAllCategoriesPartial(this.headers, categorySearch).subscribe({
       next: (categoriesFiltered) => {this.categories = categoriesFiltered;},
       error: (err) => {this.handleError(err);}
     })
