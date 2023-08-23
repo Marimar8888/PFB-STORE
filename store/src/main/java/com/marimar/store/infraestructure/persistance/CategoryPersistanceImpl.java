@@ -1,6 +1,5 @@
 package com.marimar.store.infraestructure.persistance;
 
-
 import com.marimar.store.domain.entity.Category;
 import com.marimar.store.domain.persistance.CategoryPersistance;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+
 @Repository
 public class CategoryPersistanceImpl implements CategoryPersistance {
     private final CategoryRepository categoryRepository;
