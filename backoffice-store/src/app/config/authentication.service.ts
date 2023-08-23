@@ -41,9 +41,7 @@ export class AuthenticationService {
 
   public getVerifiUserToken (){
     let token = this.cookieService.get('token') || '';
-    console.log("El TOKEN es " + token);
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    console.log("El header es" + headers);
     return headers;
   }
 
