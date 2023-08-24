@@ -2,8 +2,8 @@
 
  <ul id="banner" class="banner items" >
   <li *ngFor="let imagen of imagenesBanner">
-    <img class="card-img-top" src="{{imagen.getImage()}}" alt="Imagen de una Abrigo">
-    <p class="card-text">{{imagen.getTitulo()}}</p>
+    <img class="card-img-top" [src]="'data:image/webp;base64,' + imagen.getImage()" alt="Imagen de una Abrigo">
+    <p class="card-text">{{imagen.getTitle()}}</p>
    </li>
 
   </ul>

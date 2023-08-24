@@ -10,9 +10,12 @@ export class BannerService {
 
   constructor( private http: HttpClient ) { }
 
-  public obternerImagenesBanner(): Observable<IBanner[]> {
+ /* public obternerImagenesBanner(): Observable<IBanner[]> {
     const url: string = 'http://localhost:3012/banner';
     return this.http.get<IBanner[]>(url);
-
+  }*/
+public obternerImagenesBanner(): Observable<IBanner[]> {
+  const url: string = 'http://localhost:8080/store/bannerimages';
+  return this.http.get<IBanner[]>(url);
 }
 }
