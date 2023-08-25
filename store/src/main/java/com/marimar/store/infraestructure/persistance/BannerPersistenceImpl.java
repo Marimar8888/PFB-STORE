@@ -1,18 +1,18 @@
 package com.marimar.store.infraestructure.persistance;
 
 import com.marimar.store.domain.entity.Banner;
-import com.marimar.store.domain.persistance.BannerPersistance;
+import com.marimar.store.domain.persistance.BannerPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public class BannerPersistanceImpl implements BannerPersistance {
+public class BannerPersistenceImpl implements BannerPersistence {
 
-    private final BannerRpository bannerRpository;
+    private final BannerRepository bannerRpository;
     @Autowired
-    public BannerPersistanceImpl(BannerRpository bannerRpository) {
+    public BannerPersistenceImpl(BannerRepository bannerRpository) {
         this.bannerRpository = bannerRpository;
     }
 

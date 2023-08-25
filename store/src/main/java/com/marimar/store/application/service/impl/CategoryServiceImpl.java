@@ -4,7 +4,7 @@ import com.marimar.store.application.dto.CategoryDTO;
 import com.marimar.store.application.mapper.CategoryMapper;
 import com.marimar.store.application.service.CategoryService;
 import com.marimar.store.domain.entity.Category;
-import com.marimar.store.domain.persistance.CategoryPersistance;
+import com.marimar.store.domain.persistance.CategoryPersistence;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,10 +13,10 @@ import java.util.Optional;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-    private final CategoryPersistance categoryPersistance;
+    private final CategoryPersistence categoryPersistance;
     private final CategoryMapper categoryMapper;
 
-    public CategoryServiceImpl(CategoryPersistance categoryPersistance, CategoryMapper categoryMapper) {
+    public CategoryServiceImpl(CategoryPersistence categoryPersistance, CategoryMapper categoryMapper) {
         this.categoryPersistance = categoryPersistance;
         this.categoryMapper = categoryMapper;
     }

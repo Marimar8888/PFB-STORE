@@ -6,7 +6,7 @@ import com.marimar.store.application.mapper.ItemMapper;
 import com.marimar.store.application.mapper.ItemShopMapper;
 import com.marimar.store.application.service.ItemService;
 import com.marimar.store.domain.entity.Item;
-import com.marimar.store.domain.persistance.ItemPersistance;
+import com.marimar.store.domain.persistance.ItemPersistence;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,11 +16,11 @@ import java.util.Optional;
 
 @Service
 public class ItemServiceImpl implements ItemService {
-    private final ItemPersistance itemPersistance;
+    private final ItemPersistence itemPersistance;
     private final ItemMapper itemMapper;
     private final ItemShopMapper itemShopMapper;
 
-    public ItemServiceImpl(ItemPersistance itemPersistance, ItemMapper itemMapper, ItemShopMapper itemShopMapper) {
+    public ItemServiceImpl(ItemPersistence itemPersistance, ItemMapper itemMapper, ItemShopMapper itemShopMapper) {
         this.itemPersistance = itemPersistance;
         this.itemMapper = itemMapper;
         this.itemShopMapper = itemShopMapper;

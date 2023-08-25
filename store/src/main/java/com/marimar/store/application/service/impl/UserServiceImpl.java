@@ -8,8 +8,8 @@ import com.marimar.store.application.mapper.UserMapper;
 import com.marimar.store.application.service.UserService;
 import com.marimar.store.domain.entity.Item;
 import com.marimar.store.domain.entity.User;
-import com.marimar.store.domain.persistance.ItemPersistance;
-import com.marimar.store.domain.persistance.UserPersistance;
+import com.marimar.store.domain.persistance.ItemPersistence;
+import com.marimar.store.domain.persistance.UserPersistence;
 import com.marimar.store.utils.Encrypter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,12 +19,12 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private final UserPersistance userPersistance;
-    private final ItemPersistance itemPersistance;
+    private final UserPersistence userPersistance;
+    private final ItemPersistence itemPersistance;
     private final UserMapper mapper;
     private final ItemMapper itemMapper;
 
-    public UserServiceImpl(UserPersistance userPersistance, ItemPersistance itemPersistance, UserMapper mapper, ItemMapper itemMapper) {
+    public UserServiceImpl(UserPersistence userPersistance, ItemPersistence itemPersistance, UserMapper mapper, ItemMapper itemMapper) {
         this.userPersistance = userPersistance;
         this.itemPersistance = itemPersistance;
         this.mapper = mapper;

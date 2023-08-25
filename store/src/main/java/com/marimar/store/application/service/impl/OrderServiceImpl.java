@@ -4,7 +4,7 @@ import com.marimar.store.application.dto.OrderDTO;
 import com.marimar.store.application.mapper.OrderMapper;
 import com.marimar.store.application.service.OrderService;
 import com.marimar.store.domain.entity.Order;
-import com.marimar.store.domain.persistance.OrderPersistance;
+import com.marimar.store.domain.persistance.OrderPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,11 +15,11 @@ import java.util.Optional;
 @Service
 public class OrderServiceImpl implements OrderService {
 
-    private final OrderPersistance orderPersistance;
+    private final OrderPersistence orderPersistance;
     private final OrderMapper orderMapper;
 
     @Autowired
-    public OrderServiceImpl(OrderPersistance orderPersistance, OrderMapper orderMapper) {
+    public OrderServiceImpl(OrderPersistence orderPersistance, OrderMapper orderMapper) {
         this.orderPersistance = orderPersistance;
         this.orderMapper = orderMapper;
     }
