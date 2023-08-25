@@ -11,9 +11,12 @@ export class CarouselService {
     private http: HttpClient
   ) { }
 
-  public obternerImagenesCarousel(): Observable<ICarousel[]> {
+ /* public obternerImagenesCarousel(): Observable<ICarousel[]> {
     const url: string = 'http://localhost:3002';
     return this.http.get<ICarousel[]>(url);
-
-}
+  }*/
+  public obternerImagenesCarousel(): Observable<ICarousel[]> {
+    const url: string = 'http://localhost:8080/store/carouselimages';
+    return this.http.get<ICarousel[]>(url);
+  }
 }
