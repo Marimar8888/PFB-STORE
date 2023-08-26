@@ -1,7 +1,6 @@
 package com.marimar.store.application.service;
 
 import com.marimar.store.application.dto.CategoryDTO;
-import com.marimar.store.domain.entity.Category;
 
 import java.util.List;
 import java.util.Optional;

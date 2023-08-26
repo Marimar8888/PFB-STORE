@@ -4,20 +4,24 @@ import com.marimar.store.application.dto.ClientDTO;
 import com.marimar.store.application.dto.LoginDTO;
 import com.marimar.store.application.dto.UserDTO;
 import com.marimar.store.application.service.UserService;
+import com.marimar.store.utils.JwtConfig;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
+@CrossOrigin
 public class UserRestController {
 
-    private final UserService userService;
+   private final UserService userService;
+   private final JwtConfig jwtConfig;
 
-    public UserRestController(UserService userService) {
+    public UserRestController(UserService userService, JwtConfig jwtConfig) {
         this.userService = userService;
+        this.jwtConfig = jwtConfig;
     }
 
     @CrossOrigin
@@ -29,7 +33,14 @@ public class UserRestController {
 
     @CrossOrigin
     @GetMapping(value = "/users", produces = "application/json")
-    ResponseEntity<List<UserDTO>> getAllUsers(){
+    public ResponseEntity<List<UserDTO>> getAllUsers(HttpServletRequest request) {
+
+        String username = (String) request.getAttribute("username");
+
+        if (username == null) {
+            // El token no es válido o ha expirado, deniega el acceso
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
         List<UserDTO> users = this.userService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
@@ -48,28 +59,27 @@ public class UserRestController {
 
     @CrossOrigin
     @PostMapping(value = "/users/login", produces = "application/json", consumes = "application/json")
-    ResponseEntity<ClientDTO> logintUser(@RequestBody LoginDTO loginDTO) {
-
-        boolean UserNameExist = this.userService.UserNameExist(loginDTO.getUserName());
-        if (UserNameExist) {
-            LoginDTO loginExist = this.userService.loginAuthentication(loginDTO);
-            if (loginExist == null) {
-                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-            } else {
-                String userName = loginDTO.getUserName();
-                UserDTO userDTO = this.userService.getUserByUserName(userName);
-                ClientDTO clientDTO = new ClientDTO(userDTO.getId(), userDTO.getUserName());
-                return new ResponseEntity<>(clientDTO, HttpStatus.OK);
-            }
-        } else {
-            return new  ResponseEntity<>(HttpStatus.NOT_FOUND);
+    ResponseEntity<ClientDTO> loginUser(@RequestBody LoginDTO loginDTO) {
+        boolean userNameExists = this.userService.UserNameExist(loginDTO.getUserName());
+        if (!userNameExists) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
 
+        LoginDTO loginExist = this.userService.loginAuthentication(loginDTO);
+        if (loginExist == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+        UserDTO user = this.userService.getUserByUserName(loginDTO.getUserName());
+        // Autenticación exitosa, genera el token JWT y devuélvelo en la respuesta
+        String token = jwtConfig.generateToken(loginDTO.getUserName());
+        ClientDTO clientDTO = new ClientDTO(user.getId(), user.getUserName(), token);
+        return ResponseEntity.ok(clientDTO);
+    }
 
     @CrossOrigin
     @PutMapping(value= "/users/{userName}/favorites/{itemId}")
     public ResponseEntity<List<Long>> insertItemsInUsers(@PathVariable Long itemId, @PathVariable String userName){
+
        boolean insertOk = userService.insertFavoriteByUserIdAndByItemid(userName, itemId);
 
        if(insertOk){
@@ -81,6 +91,7 @@ public class UserRestController {
     @CrossOrigin
     @DeleteMapping(value="/users/{userName}/favorites/remove/{itemId}")
     public ResponseEntity<Void> deleteFavoriteByUserNameAndByItemId(@PathVariable String userName, @PathVariable Long itemId){
+
         boolean deleteOk = userService.deleteFavoriteByItemId(userName, itemId);
         if(deleteOk){
             return new ResponseEntity<>(HttpStatus.OK);

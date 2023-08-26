@@ -111,7 +111,7 @@ export class ShopCartComponent implements OnInit {
   }
 
   addToOrder(){
-    if(this.cookieService.get('tokenId')){
+    if(this.cookieService.get('Id')){
       if(this.shopCartService.listCart){
         this.shopCartService.listCart = this.products;
         this.router.navigate(['/order']);

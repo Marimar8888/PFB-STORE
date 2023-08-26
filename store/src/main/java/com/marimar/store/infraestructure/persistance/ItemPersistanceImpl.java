@@ -3,7 +3,7 @@ package com.marimar.store.infraestructure.persistance;
 
 import com.marimar.store.infraestructure.specs.ItemSpecification;
 import com.marimar.store.domain.entity.Item;
-import com.marimar.store.domain.persistance.ItemPersistance;
+import com.marimar.store.domain.persistance.ItemPersistence;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class ItemPersistanceImpl implements ItemPersistance {
+public class ItemPersistanceImpl implements ItemPersistence {
 
     private final ItemRepository itemRepository;
 

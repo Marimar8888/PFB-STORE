@@ -1,20 +1,26 @@
-server:
-  servlet:
-    context-path: /store
-Spring:
-  datasource:
-    url: jdbc:h2:./store
-  jpa:
-    hibernate:
-      ddl-auto: update
-    open-in-view: false
-    show-sql: true
-    properties:
+  server:
+    servlet:
+      context-path: /store
+
+  Spring:
+    jwt:
+      secret: oweijqwleHoi2Tweinlpo54Qewas9jGcxznbm
+      expiration: 3600000
+    datasource:
+      url: jdbc:h2:./store
+    jpa:
       hibernate:
-        format_sql: true
-  main:
-    allow-circular-references: true
-  h2:
-    console:
-      enabled: true
-      path: /console
+        ddl-auto: update
+      open-in-view: false
+      show-sql: true
+      properties:
+        hibernate:
+          format_sql: true
+    main:
+      allow-circular-references: true
+    h2:
+      console:
+        enabled: true
+        path: /console
+
+

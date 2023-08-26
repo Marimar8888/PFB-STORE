@@ -42,11 +42,11 @@ export class ItemCardComponent implements OnInit {
         this.router.navigate(['/login']);
     }else{
       if(!article.getFavorite()){
-        this.userName = this.cookieService.get('token');
+        this.userName = this.cookieService.get('user');
         this.itemId = article.getId();
         this.insertFavorite(this.userName, this.itemId);
       }else{
-        this.userName = this.cookieService.get('token');
+        this.userName = this.cookieService.get('user');
         this.itemId = article.getId();
         this.removeFavorite(this.userName, this.itemId);
         this.favoriteClass=false;

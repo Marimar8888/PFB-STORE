@@ -32,12 +32,11 @@ export class HeaderComponent {
 
   }
   logOut(){
-     this.cookieService.delete('token');
-     localStorage.removeItem('token');
-     this.cookieService.delete('tokenId');
-     localStorage.removeItem('tokenId');
-     this.session = false;
-     this.router.navigate(['/login']);
+    this.cookieService.delete('token');
+    this.cookieService.delete('Id');
+    this.cookieService.delete('user');
+    this.session = false;
+    this.router.navigate(['/login']);
   }
 
 }

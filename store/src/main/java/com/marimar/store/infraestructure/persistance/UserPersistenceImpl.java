@@ -1,7 +1,7 @@
 package com.marimar.store.infraestructure.persistance;
 
 import com.marimar.store.domain.entity.User;
-import com.marimar.store.domain.persistance.UserPersistance;
+import com.marimar.store.domain.persistance.UserPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class UserPersistanceImpl implements UserPersistance {
+public class UserPersistenceImpl implements UserPersistence {
 
     private final UserRepository userRepository;
 
     @Autowired
-    public UserPersistanceImpl(UserRepository userRepository) {
+    public UserPersistenceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

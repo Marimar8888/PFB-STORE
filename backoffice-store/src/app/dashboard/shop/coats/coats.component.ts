@@ -28,7 +28,7 @@ export class CoatsComponent implements OnInit {
       this.getAllCoats();
 
     }else{
-      this.username = this.cookieService.get('token');
+      this.username = this.cookieService.get('user');
       this.getAllItemsWithFavorites(this.username);
     }
   }
