@@ -49,9 +49,8 @@ export class OrderComponent implements OnInit {
     }
     
   }
-
     process(products: IItemCart[]): void{
-      this.userId = parseInt(this.cookieService.get('tokenId'));
+      this.userId = parseInt(this.cookieService.get('Id'));
       const newOrderLines : IOrderLine[] = this.createOrderLines(products);
       if(newOrderLines.length>0){
         this.order = this.createOrder(this.userId, newOrderLines);

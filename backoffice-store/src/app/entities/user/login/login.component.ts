@@ -31,25 +31,21 @@ export class LoginComponent implements OnInit{
   }
 
   private buildForm() {
-
     this.userForm = this.fb.group({
       userName:['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
       password:['', [Validators.required, Validators.minLength(8)]]
-
     });
   }
   public saveUser(): void {
     const userToSave: ILoginUser = this.createFromForm();
     this.loginUser(userToSave);
   }
-
   private loginUser(userToSave: ILoginUser) {
     this.userService.logintUser(userToSave).subscribe({
       next: (response) =>{
         this.userLogin = response.userName;
         this.userId = response.id;
         this.userToken = response.token;
-        console.log(this.userId);
         this.cookieService.set('user', this.userLogin, 2 );
         this.cookieService.set('Id', this.userId.toString());
         this.cookieService.set('token', this.userToken);
@@ -61,7 +57,7 @@ export class LoginComponent implements OnInit{
     })
   }
 
-
+ 
   private createFromForm(): ILoginUser {
     return {
       ...this.user,

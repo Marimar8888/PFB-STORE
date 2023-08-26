@@ -3,8 +3,6 @@ import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Observable, tap  } from 'rxjs';
 import { IUser } from '../interface/user.interface';
 import { ILoginUser } from '../interface/loginUser.interface';
-import { ListKeyManager } from '@angular/cdk/a11y';
-import { IFavorites } from '../interface/favorites.interface';
 import { IClientUser } from '../interface/clientUser.interface';
 
 @Injectable({
@@ -21,10 +19,8 @@ export class UserService {
   constructor(private httpClient: HttpClient ) { }
 
   public insertUser(user: IUser): Observable<IUser>{ return this.httpClient.post<IUser>(this.url, user); }
- // public logintUser(creds: ILoginUser){ return this.httpCliente.post<IUser>(this.urlLogin, creds); }
   public logintUser(creds: ILoginUser): Observable<IClientUser>{ return this.httpClient.post<IClientUser>(this.urlLogin, creds).pipe(
   tap((response: IClientUser) =>{
-    console.log(response);
   })
  ); }
   public insertFavoriteByUserNameAndItemId(userName: string, itemId: number) {

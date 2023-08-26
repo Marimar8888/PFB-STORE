@@ -55,7 +55,6 @@ export class ItemListComponent implements OnInit{
       },
       error: (err) => { this.handleError(err); }
     })
-    console.log(this.items);
   }
 
 
