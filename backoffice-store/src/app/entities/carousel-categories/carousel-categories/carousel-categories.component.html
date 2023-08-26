@@ -6,17 +6,17 @@
     <div class="carousel-inner">
       <ul id="banner" class="banner items carousel-item active" >
         <li *ngFor="let imagen of imagenesCategoria">
-          <img class="card-img-top" src="{{imagen.getImage()}}" alt="Imagen de una Abrigo">
+          <img class="card-img-top" [src]="'data:image/webp;base64,' + imagen.getImage()" alt="Imagen de una Abrigo">
         </li>
       </ul>
       <ul id="banner" class="banner items carousel-item " >
         <li *ngFor="let imagen of imagenesCategoria">
-          <img class="card-img-top" src="{{imagen.getImage()}}" alt="Imagen de una Abrigo">
+          <img class="card-img-top" [src]="'data:image/webp;base64,' + imagen.getImage()" alt="Imagen de una Abrigo">
         </li>
       </ul>
       <ul id="banner" class="banner items carousel-item " >
         <li *ngFor="let imagen of imagenesCategoria">
-          <img class="card-img-top" src="{{imagen.getImage()}}" alt="Imagen de una Abrigo">
+          <img class="card-img-top" [src]="'data:image/webp;base64,' + imagen.getImage()" alt="Imagen de una Abrigo">
         </li>
       </ul>
     </div>

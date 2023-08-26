@@ -11,7 +11,7 @@ export class CarouselCategoriesService {
   constructor( private http: HttpClient  ) { }
 
   public obternerImagenesCategoriasCarousel(): Observable<ICarouselCategories[]> {
-    const url: string = 'http://localhost:3004';
+    const url: string = 'http://localhost:8080/store/categoryImages';
     return this.http.get<ICarouselCategories[]>(url);
   }
 }
