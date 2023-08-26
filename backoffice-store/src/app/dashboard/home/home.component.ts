@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit{
     this.bannerService.obternerImagenesBanner().subscribe(
       (data) =>{
         data.forEach( (imagen) =>{ //recibo los artículos y a través de la interfaz recupero los datos
-          const imagenNew: Banner = new Banner(imagen.id, imagen.image, imagen.titulo);
+          const imagenNew: Banner = new Banner(imagen.id, imagen.image, imagen.title);
             this.imagenesBanner.push(imagenNew);
         })
       }

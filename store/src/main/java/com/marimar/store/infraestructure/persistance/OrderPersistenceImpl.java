@@ -1,7 +1,7 @@
 package com.marimar.store.infraestructure.persistance;
 
 import com.marimar.store.domain.entity.Order;
-import com.marimar.store.domain.persistance.OrderPersistance;
+import com.marimar.store.domain.persistance.OrderPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class OrderPersistanceImpl implements OrderPersistance {
+public class OrderPersistenceImpl implements OrderPersistence {
 
     private final OrderRepository orderRepository;
 
     @Autowired
-    public OrderPersistanceImpl(OrderRepository orderRepository) {
+    public OrderPersistenceImpl(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
 

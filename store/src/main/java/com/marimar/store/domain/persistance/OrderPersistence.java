@@ -5,7 +5,7 @@ import com.marimar.store.domain.entity.Order;
 import java.util.List;
 import java.util.Optional;
 
-public interface OrderPersistance {
+public interface OrderPersistence {
     List<Order> getOrders();
     Optional<Order> getOrderById(Long id);
     Order createOrder(Order order);

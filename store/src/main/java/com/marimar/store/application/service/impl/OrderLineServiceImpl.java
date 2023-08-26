@@ -4,7 +4,7 @@ import com.marimar.store.application.dto.OrderLineDTO;
 import com.marimar.store.application.mapper.OrderLineMapper;
 import com.marimar.store.application.service.OrderLineService;
 import com.marimar.store.domain.entity.OrderLine;
-import com.marimar.store.domain.persistance.OrderLinePersistance;
+import com.marimar.store.domain.persistance.OrderLinePersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,11 +15,11 @@ import java.util.Optional;
 @Service
 public class OrderLineServiceImpl implements OrderLineService {
 
-    private final OrderLinePersistance orderLinePersistance;
+    private final OrderLinePersistence orderLinePersistance;
     private final OrderLineMapper orderLineMapper;
 
     @Autowired
-    public OrderLineServiceImpl(OrderLinePersistance orderLinePersistance, OrderLineMapper orderLineMapper) {
+    public OrderLineServiceImpl(OrderLinePersistence orderLinePersistance, OrderLineMapper orderLineMapper) {
         this.orderLinePersistance = orderLinePersistance;
         this.orderLineMapper = orderLineMapper;
     }

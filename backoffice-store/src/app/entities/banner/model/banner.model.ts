@@ -1,12 +1,12 @@
 export class Banner {
   private _id: number;
   private _image: string;
-  private _titulo: string;
+  private _title: string;
 
-  constructor(id: number, image: string, titulo: string) {
+  constructor(id: number, image: string, title: string) {
       this._id = id;
       this._image = image;
-      this._titulo = titulo;
+      this._title = title;
   }
   public getId(): number {
       return this._id;
@@ -15,8 +15,8 @@ export class Banner {
   public getImage(): string {
       return this._image;
   }
-  public getTitulo(): string {
-    return this._titulo;
+  public getTitle(): string {
+    return this._title;
 }
 
   public setId(id: number) {
@@ -27,8 +27,8 @@ export class Banner {
       this._image = image;
   }
 
-  public setTitulo(titulo: string) {
-    this._titulo = titulo;
+  public setTitle(title: string) {
+    this._title = title;
 }
 
 

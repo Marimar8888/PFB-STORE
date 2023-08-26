@@ -28,7 +28,7 @@ export class SportsComponent implements OnInit {
       this.getAllSports();
 
     }else{
-      this.username = this.cookieService.get('token');
+      this.username = this.cookieService.get('user');
       this.getAllItemsWithFavorites(this.username);
     }
   }

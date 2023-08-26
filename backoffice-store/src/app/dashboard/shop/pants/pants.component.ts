@@ -27,7 +27,7 @@ export class PantsComponent implements OnInit {
       this.getAllPants();
 
     }else{
-      this.username = this.cookieService.get('token');
+      this.username = this.cookieService.get('user');
       this.getAllItemsWithFavorites(this.username);
     }
   }
